@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login Page";
+}<div>
+    <h1 style='text-align:center'>Login page</h1>
+    <br />
+    <br />
+    <style>
+        body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p.error {
+            color: red;
+            animation-name:test;
+            animation-duration: 10s;
+
+        }
+       @@keyframes test{
+          from{  color:red;}
+           to{ color:blue;}
+        }
+        
+    </style>
+    <p class="error"> you must login to have access to the home page</p>
+    <br />
+    <div style='text-align:center' name="LoginService">
+        <form action="/login/data" method="get">
+            <label for="username">Enter your username</label>
+            <br />
+            <input type="text" name="username" />
+            <br />
+            <label for="password">Enter your password</label>
+            <br />
+            <input type="text" name="password" />
+            <br />
+            <input type="submit" value="Login" class="btn btn-success" />
+        </form>
+        <p>Pas un membre?<a href="Inscription/index">Veuillez vous inscrire ici!</a></p>
+    </div>
+</div>
