@@ -3,45 +3,51 @@
 *@
 @{
     ViewData["Title"] = "Login Page";
-}<div>
-    <h1 style='text-align:center'>Login page</h1>
-    <br />
-    <br />
-    <style>
-        body {
-            background-color: powderblue;
-        }
+}
+<div style="text-align:left" class="grid-container">
 
-        h1 {
-            color: blue;
-        }
+    <div name="LoginService">
+        <br/>
+        <br/>
+        <h1 class="Comingback">Coming back?</h1>
+        <div class="e1_74">
+        <form  name="LoginForm" action="/login/data" method="get">
+                <br/>
+                <br/>
+                <div style="text-align:center" name="inputs">
+                <div style="padding-left:60px"  class="e1_59">
+                <label class="ei1_59_1_7" for="username">Username</label>
+                <br/>
+                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <br/>
+                <div style="padding-left:60px" class="e1_59">
+                <label class="ei1_59_1_7" for="password">Password</label>
+                <br />
+                <input type="password" name="password" class="form-control" style="" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
+                </div>
+                </div>
+                <div style="margin-left:60px" class="e1_67"><span  type="submit" onclick="LoginForm.submit()" class="ei1_67_1_27">Login</span></div>
+                <br/>
+                <br/>
+            </form>
+            <br/>
+            <p style="padding-right:60px">New to ReadIT ?<a href="Inscription/index"> Sign-up here</a></p>
+        </div>
 
-        p.error {
-            color: red;
-            animation-name:test;
-            animation-duration: 10s;
 
-        }
-       @@keyframes test{
-          from{  color:red;}
-           to{ color:blue;}
-        }
-        
-    </style>
-    <p class="error"> you must login to have access to the home page</p>
-    <br />
-    <div style='text-align:center' name="LoginService">
-        <form action="/login/data" method="get">
-            <label for="username">Enter your username</label>
-            <br />
-            <input type="text" name="username" />
-            <br />
-            <label for="password">Enter your password</label>
-            <br />
-            <input type="text" name="password" />
-            <br />
-            <input type="submit" value="Login" class="btn btn-success" />
-        </form>
-        <p>Pas un membre?<a href="Inscription/index">Veuillez vous inscrire ici!</a></p>
     </div>
+
+
+
+
+    <div style="text-align:right" name="image">
+        <img src="/images/Login/undraw_Bookshelves_re_lxoy.png" />
+    </div>
+
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Passion+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/LoginPage.css">
 </div>

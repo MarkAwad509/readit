@@ -37,13 +37,10 @@ namespace ProjetWebServer_.DAL
             {
                 return false;
             }
-
-            
-            return false;
         }
         public User getUser( string user)
         {
-            User current= null;
+            User? current = null;
            connection();
             MySqlCommand myCommand = conn.CreateCommand();
             myCommand.CommandText = "SELECT User from Users WHERE username= LIMIT 1" + user;

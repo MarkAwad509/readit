@@ -17,7 +17,7 @@ namespace projetwebserver.Controllers
         public IActionResult Index()
         {
             ViewBag.Connected = false;
-            if (ViewBag.Connected = true)
+            if (ViewBag.Connected = false)
             {
                 return View();
             }
