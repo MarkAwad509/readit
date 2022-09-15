@@ -1,21 +1,27 @@
-﻿namespace projetwebserver.Models
+﻿namespace Readit.Models
 {
     public class User
     {
-        public string UserName { get; set; }  
-        public string Password { get; set; }    
+        private static int AUTO_ID = -1;
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
-        public string Email { get; set; }   
-        public string Name { get; set; }    
-        public string phone { get; set; }   
-
-        public User(string userName, string password, string email, string name, string phone)
-        {
-            UserName = userName;
-            Password = password;
+        public User(int id, string username, string email, string password) {
+            Id = id;
+            Username = username;
             Email = email;
-            Name = name;
-            this.phone = phone;
+            Password = password;
         }
+        
+        public User(string username, string email, string password) {
+            Id = AUTO_ID++;
+            Username = username;
+            Email = email;
+            Password = password;
+        }
+
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-using projetwebserver.Models;
+using Readit.Models;
 using System.Diagnostics;
 
 namespace projetwebserver.Controllers
