@@ -14,17 +14,8 @@ namespace projetwebserver.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.Connected = false;
-            if (ViewBag.Connected = false)
-            {
-                return View();
-            }
-            else
-            {
-                return View("Login");
-            }
+        public IActionResult Index() {
+            return View();
         }
 
         public IActionResult Privacy()
