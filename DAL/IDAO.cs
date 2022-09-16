@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using MySql.Data.MySqlClient;
+
 
 namespace ProjetWebServer_.DAL
 {

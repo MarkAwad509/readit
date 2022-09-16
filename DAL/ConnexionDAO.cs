@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+﻿using MySql.Data.MySqlClient;
 using projetwebserver.Models;
 using System.Data;
 using System.Data.Common;
@@ -8,7 +8,7 @@ namespace ProjetWebServer_.DAL
     public class ConnexionDAO : IDAO
     {
         MySqlConnection conn;
-        string myConnectionString = "server=mysql-projetwebserveur.alwaysdata.net;uid=279794_simuser;" + "pwd=SimpleUser12;database=projetwebserveur_connexion ";
+        string myConnectionString = "server=mysql-projetwebserveur.alwaysdata.net;uid=279794_simuser;" + "pwd=SimpleUser12;database= ";
         public override MySqlConnection connection()
         {
             try
