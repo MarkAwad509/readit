@@ -1,0 +1,74 @@
+﻿.welcome-title {
+    color:#2D2B2B;
+    width: fit-content;
+    height: fit-content;
+    font-size:64px;
+    margin:0px;
+    margin-left:25px;
+}
+
+.sign-walk-img {
+    position: relative;
+    top: 90px;
+    right: 200px;
+    height: 641px;
+    width: 650px;
+}
+
+.action-container {
+    position: relative;
+    top: 90px;
+    left: 80px;
+}
+
+.submit-btn {
+    background-color: #5E5BFF;
+    color: white;
+    font-size:32px;
+}
+
+.submit-btn :hover{
+    opacity:70%;
+}
+
+.submit-group {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-redirect {
+    display:block;
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #4E4D4D;
+    text-decoration: none;
+}
+
+.input-label{
+    font-size: 32px;
+    margin-left: 20px;
+}
+
+.input-full {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-half{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-group {
+    top:50%;
+}
+
+input::placeholder {
+    color: #D2D2D2;
+}

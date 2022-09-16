@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-using projetwebserver.Models;
+using Readit.Models;
 using System.Diagnostics;
 
 namespace projetwebserver.Controllers
@@ -14,17 +14,8 @@ namespace projetwebserver.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.Connected = false;
-            if (ViewBag.Connected = false)
-            {
-                return View();
-            }
-            else
-            {
-                return View("Login");
-            }
+        public IActionResult Index() {
+            return View();
         }
 
         public IActionResult Privacy()
