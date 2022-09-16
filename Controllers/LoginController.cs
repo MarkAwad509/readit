@@ -10,13 +10,5 @@ namespace ProjetWebServer_.Controllers
         {
             return View("Login");
         }
-        public IActionResult data(string user,string pass)
-        {
-            //needs logic for login if else and confirm with  dao.confirmPerson
-            SQLConnector dao = new SQLConnector();
-            dao.ConfirmPerson(user,pass);
-            
-            return View("~/Views/Home/Index.cshtml");
-        }
     }
 }

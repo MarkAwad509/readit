@@ -1,4 +1,6 @@
-﻿namespace Readit.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Readit.Models
 {
     public class User
     {
@@ -7,6 +9,7 @@
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string PasswordConfirm { get; }
 
         public User(int id, string username, string email, string password) {
             Id = id;
@@ -22,6 +25,8 @@
             Password = password;
         }
 
-
+        public override string? ToString() {
+            return $"username={this.Username}, email={this.Email}, password={this.Password}";
+        }
     }
 }
