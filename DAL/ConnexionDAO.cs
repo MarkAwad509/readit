@@ -37,16 +37,13 @@ namespace ProjetWebServer_.DAL
             {
                 return false;
             }
-
-            
-            return false;
         }
         public User getUser( string user)
         {
-            User current= null;
+            User? current = null;
            connection();
             MySqlCommand myCommand = conn.CreateCommand();
-            myCommand.CommandText = "SELECT User from Users WHERE username= LIMIT 1" + user;
+            myCommand.CommandText = "SELECT User from Users WHERE username="+user+" LIMIT 1";
             try
             {
                 conn.Open();
@@ -59,7 +56,7 @@ namespace ProjetWebServer_.DAL
             MySqlDataReader reader = myCommand.ExecuteReader();
             while (reader.Read())
             {
-                current = new User(reader.GetString("username"), reader.GetString("password"), reader.GetString("email"), reader.GetString("name"), reader.GetString("phone"));
+                current = new User(reader.GetString("username"), reader.GetString("password"), reader.GetString("email"));
             }
             return current;
         }

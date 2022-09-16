@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using projetwebserver.Models;
 using ProjetWebServer_.DAL;
 
 namespace ProjetWebServer_.Controllers
@@ -14,9 +15,16 @@ namespace ProjetWebServer_.Controllers
         {
             //needs logic for login if else and confirm with  dao.confirmPerson
             ConnexionDAO dao = new ConnexionDAO();
-            dao.ConfirmPerson(user,pass);
-            
-            return View("~/Views/Home/Index.cshtml");
+            if(true)
+            {
+                User testuser = new projetwebserver.Models.User("jeremy", "jeremy", "jeremy");
+                ViewBag.ConnectedUser = testuser;
+                return View("~/Views/Home/Index.cshtml");
+            }
+            else
+            {
+             return View("~/Views/Home/Login");
+            }
         }
     }
 }

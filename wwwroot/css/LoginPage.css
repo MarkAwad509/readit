@@ -1,0 +1,106 @@
+﻿body {
+
+}
+/*this is for username*/
+.e1_59 {
+    width: 300px;
+    height: 84px;
+}
+
+.ei1_59_1_7 {
+    color: rgba(0, 0, 0, 1);
+    width: 300px;
+    height: 28px;
+    left: 0px;
+    top: 1px;
+    font-family: Passion One;
+    text-align: left;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: px;
+}
+
+.ei1_59_1_36 {
+    background-color: rgba(255, 255, 255, 1);
+    width: 300px;
+    height: 48px;
+    position: absolute;
+    left: 0px;
+    top: 28px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.i1_59_1_36 {
+    border: 1px solid rgba(173.00000488758087, 173.00000488758087, 179.000004529953, 1);
+}
+
+.ei1_59_1_46 {
+    color: rgba(210.00000268220901, 210.00000268220901, 210.00000268220901, 1);
+    width: 74px;
+    height: 28px;
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    font-family: Passion One;
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: px;
+}
+/* this is for button*/
+
+.e1_67 {
+    background-color: rgba(94.0000019967556, 91.00000217556953, 255, 1);
+    width: 94px;
+    height: 48px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: absolute;
+}
+
+.1_67 {
+    border: 1px solid rgba(94.0000019967556, 91.00000217556953, 255, 1);
+}
+
+.ei1_67_1_27 {
+    color: rgba(255, 255, 255, 1);
+    width: 64px;
+    height: 28px;
+    position: absolute;
+    left: 15px;
+    top: 1px;
+    font-family: Passion One;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: px;
+}
+/* this is for login square*/
+.e1_74 {
+    text-align: center;
+    align-items:center;
+    background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 1);
+    width: 393px;
+    height: 420px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+/*columns*/
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 200px;
+}
+/*coming back */
+.Comingback {
+    font-family: Passion One;
+    font-size: 50px;
+
+}
