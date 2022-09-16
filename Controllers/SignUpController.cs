@@ -8,7 +8,8 @@ namespace Readit.Controllers {
         }
 
         public IActionResult CreateUser() {
-            return View("../Home/Index");
+            return RedirectToAction("Index","Home");
+            //return View("../Home/Index");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ProjetWebServer_.Controllers
         
         public IActionResult Index()
         {
-            return View("Login");
+            return View();
         }
     }
 }
