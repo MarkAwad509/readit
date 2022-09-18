@@ -1,12 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 
-
 namespace ProjetWebServer_.DAL
 {
-    public abstract class IDAO
+    public interface IDAO
     {
-
-        public abstract MySqlConnection connection();
-
+        public MySqlConnection connection();
     }
 }

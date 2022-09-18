@@ -1,0 +1,39 @@
+CREATE TABLE Member(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(20),
+    Email VARCHAR(35),
+    Password VARCHAR (25)
+) AUTO_INCREMENT = 0;
+
+INSERT INTO Member(Username, Email, Password)
+VALUES ('Admin', 'admin22@colval.qc.ca', 'Admin22!');
+
+CREATE TABLE Link(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Title VARCHAR(30),
+    Description VARCHAR(200),
+    UpVote_Amount INT,
+    DownVote_Amount INT,
+    Publication_Date DATETIME,
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID)
+) AUTO_INCREMENT = 100;*/
+
+CREATE TABLE Member_Vote(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Link_ID INT,
+    IsUpVote BIT(1),
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID),
+    FOREIGN KEY (Link_ID) REFERENCES Link(ID)
+)AUTO_INCREMENT = 1000;
+
+CREATE TABLE Comment(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Link_ID INT,
+    Content VARCHAR(100),
+    Publication_Date DATETIME,
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID),
+    FOREIGN KEY (Link_ID) REFERENCES Link(ID)
+) AUTO_INCREMENT = 10000

@@ -1,5 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-using projetwebserver.Models;
+using Readit.Models.Entities;
 using System.Data;
 using System.Data.Common;
 
@@ -9,7 +9,7 @@ namespace ProjetWebServer_.DAL
     {
         MySqlConnection conn;
         string myConnectionString = "server=mysql-projetwebserveur.alwaysdata.net;uid=279794_simuser;" + "pwd=SimpleUser12;database= ";
-        public override MySqlConnection connection()
+        public MySqlConnection connection()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace ProjetWebServer_.DAL
         public User getUser( string user)
         {
             User? current = null;
-           connection();
+            connection();
             MySqlCommand myCommand = conn.CreateCommand();
             myCommand.CommandText = "SELECT User from Users WHERE username="+user+" LIMIT 1";
             try

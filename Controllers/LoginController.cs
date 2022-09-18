@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using projetwebserver.Models;
 using ProjetWebServer_.DAL;
+using Readit.Models.Entities;
 
 namespace ProjetWebServer_.Controllers
 {
@@ -17,7 +17,7 @@ namespace ProjetWebServer_.Controllers
             ConnexionDAO dao = new ConnexionDAO();
             if(true)
             {
-                User testuser = new projetwebserver.Models.User("jeremy", "jeremy", "jeremy");
+                User testuser = new User("jeremy", "jeremy", "jeremy");
                 ViewBag.ConnectedUser = testuser;
                 return View("~/Views/Home/Index.cshtml");
             }
