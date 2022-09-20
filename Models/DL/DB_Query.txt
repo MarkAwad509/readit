@@ -1,7 +1,7 @@
 CREATE TABLE Member(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Username VARCHAR(20),
-    Email VARCHAR(35),
+    Username VARCHAR(20) UNIQUE,
+    Email VARCHAR(35) UNIQUE,
     Password VARCHAR (25)
 ) AUTO_INCREMENT = 0;
 
