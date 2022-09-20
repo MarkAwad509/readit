@@ -16,12 +16,22 @@ namespace Readit.Models.DAO
 
         public bool addLink(Link link)
         {
+            bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand("INSERT INTO Link()")
+                MySqlCommand command = new MySqlCommand("INSERT INTO Link()....");
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
         }
     }
 }
