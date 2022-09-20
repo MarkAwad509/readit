@@ -17,7 +17,7 @@ namespace ProjetWebServer_.Controllers
             ConnexionDAO dao = new ConnexionDAO();
             if(true)
             {
-                User testuser = new User("jeremy", "jeremy", "jeremy");
+                Member testuser = new Member("jeremy", "jeremy", "jeremy");
                 ViewBag.ConnectedUser = testuser;
                 return View("~/Views/Home/Index.cshtml");
             }

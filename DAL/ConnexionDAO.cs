@@ -27,7 +27,7 @@ namespace ProjetWebServer_.DAL
 
         public bool ConfirmPerson(string user, string pass)
         {
-            User check = getUser(user);
+            Member check = getUser(user);
 
             if(check.UserName == user && check.Password == pass)
             {
@@ -38,9 +38,9 @@ namespace ProjetWebServer_.DAL
                 return false;
             }
         }
-        public User getUser( string user)
+        public Member getUser( string user)
         {
-            User? current = null;
+            Member? current = null;
             connection();
             MySqlCommand myCommand = conn.CreateCommand();
             myCommand.CommandText = "SELECT User from Users WHERE username="+user+" LIMIT 1";
@@ -56,7 +56,7 @@ namespace ProjetWebServer_.DAL
             MySqlDataReader reader = myCommand.ExecuteReader();
             while (reader.Read())
             {
-                current = new User(reader.GetString("username"), reader.GetString("password"), reader.GetString("email"));
+                current = new Member(reader.GetString("username"), reader.GetString("password"), reader.GetString("email"));
             }
             return current;
         }

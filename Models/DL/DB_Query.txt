@@ -17,7 +17,7 @@ CREATE TABLE Link(
     DownVote_Amount INT,
     Publication_Date DATETIME,
     FOREIGN KEY (Member_ID) REFERENCES Member(ID)
-) AUTO_INCREMENT = 100;*/
+) AUTO_INCREMENT = 100;
 
 CREATE TABLE Member_Vote(
     ID INT PRIMARY KEY AUTO_INCREMENT,
