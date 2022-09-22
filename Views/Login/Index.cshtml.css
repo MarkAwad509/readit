@@ -101,6 +101,12 @@
 /*coming back */
 .Comingback {
     font-family: Passion One;
-    font-size: 50px;
+    font-size: 50px
+}
 
+.signup-redirect {
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #4E4D4D;
+    text-decoration: none;
 }
