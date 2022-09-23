@@ -1,8 +1,9 @@
-﻿namespace Readit.Models.Entities
+﻿using MySql.Data.Types;
+
+namespace Readit.Models.Entities
 {
     public class Link
     {
-        private static int AUTO_ID = -1;
         public int ID { get; set; }
         public Member Publisher { get; set; }
         public string Title { get; set; }
@@ -37,15 +38,5 @@
             PublicationDate = date;
         }
 
-        public Link(Member publisher, string title, string description, int upVote, int downVote, DateTime date, IList<Comment> comments) {
-            ID = AUTO_ID++;
-            Publisher = publisher;
-            Title = title;
-            Description = description;
-            UpVote = upVote;
-            DownVote = downVote;
-            PublicationDate = date;
-            this.Comments = comments;
-        }
     }
 }

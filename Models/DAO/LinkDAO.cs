@@ -168,5 +168,37 @@ namespace Readit.Models.DAO
 
             return result;
         }
+
+        public List<Comment> GetCommentsByLinkID(int id)
+        {
+            List<Comment> comments = new List<Comment>();
+            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand("SELECT * FROM Comment WHERE Link_ID=@id ORDER BY Publication_Date");
+                command.Parameters.Add(new MySqlParameter("@id", id));
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    comments.Add(new Comment()
+                    {
+                        ID = reader.GetInt32("ID"),
+                        User = dao.GetMemberByID(reader.GetInt32("Member_ID")),
+                        Content = reader.GetString("Content"),
+                        Publication = reader.GetDateTime("Publication_Date")
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return comments;
+        }
     }
 }

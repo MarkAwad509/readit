@@ -1,4 +1,6 @@
-﻿namespace Readit.Models.Entities
+﻿using MySql.Data.Types;
+
+namespace Readit.Models.Entities
 {
     public class Comment
     {
