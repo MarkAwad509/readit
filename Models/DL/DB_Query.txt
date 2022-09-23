@@ -1,0 +1,80 @@
+CREATE TABLE Member(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(20) UNIQUE,
+    Email VARCHAR(35) UNIQUE,
+    Password VARCHAR (25)
+) AUTO_INCREMENT = 0;
+
+INSERT INTO Member(Username, Email, Password)
+VALUES ('Admin', 'admin22@colval.qc.ca', 'Admin22!');
+
+CREATE TABLE Link(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Title VARCHAR(30),
+    Description VARCHAR(200),
+    UpVote INT,
+    DownVote INT,
+    Publication_Date DATETIME,
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID)
+) AUTO_INCREMENT = 100;
+
+CREATE TABLE Member_Vote(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Link_ID INT,
+    IsUpVote BIT(1),
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID),
+    FOREIGN KEY (Link_ID) REFERENCES Link(ID)
+)AUTO_INCREMENT = 1000;
+
+CREATE TABLE Comment(
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Member_ID INT,
+    Link_ID INT,
+    Content VARCHAR(100),
+    Publication_Date DATETIME,
+    FOREIGN KEY (Member_ID) REFERENCES Member(ID),
+    FOREIGN KEY (Link_ID) REFERENCES Link(ID)
+) AUTO_INCREMENT = 10000
+
+
+CREATE TRIGGER vote_insertion
+    AFTER INSERT
+    ON Member_Vote FOR EACH ROW
+BEGIN
+    IF NEW.IsUpVote = 1 THEN
+        UPDATE Link SET Link.UpVote = Link.Upvote + 1 WHERE Link.ID = NEW.Link_ID;
+    ELSEIF NEW.IsUpVote = 0 THEN
+        UPDATE Link SET Link.DownVote = Link.DownVote + 1 WHERE Link.ID = NEW.Link_ID;
+    END IF;
+
+END;
+
+
+CREATE TRIGGER vote_deletion
+    AFTER DELETE
+    ON Member_Vote FOR EACH ROW
+BEGIN
+    IF OLD.IsUpVote = 1 THEN
+        UPDATE Link SET Link.UpVote = Link.Upvote - 1 WHERE Link.ID = OLD.Link_ID;
+    ELSEIF OLD.IsUpVote = 0 THEN
+        UPDATE Link SET Link.DownVote = Link.DownVote - 1 WHERE Link.ID = OLD.Link_ID;
+    END IF;
+
+END;
+
+
+CREATE TRIGGER vote_update
+    AFTER UPDATE
+    ON Member_Vote FOR EACH ROW
+BEGIN
+    IF NEW.IsUpVote = 1 THEN
+        UPDATE Link SET Link.UpVote = Link.UpVote + 1 WHERE Link.ID = NEW.Link_ID;
+        UPDATE Link SET Link.DownVote = Link.DownVote - 1 WHERE Link_ID = NEW.Link_ID;
+    ELSEIF NEW.IsUpVote = 0 THEN
+        UPDATE Link SET Link.UpVote = Link.UpVote - 1 WHERE Link.ID = NEW.Link_ID;
+        UPDATE Link SET Link.DownVote = Link.DownVote + 1 WHERE Link_ID = NEW.Link_ID;
+    END IF;
+
+END;

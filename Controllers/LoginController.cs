@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Readit.DAL;
 
-namespace ProjetWebServer_.Controllers
+namespace Readit.Controllers
 {
     public class LoginController : Controller
     {
-        
-        public IActionResult Index()
-        {
+        public IActionResult Index() {
             return View();
         }
+
+    }
     }
 }
