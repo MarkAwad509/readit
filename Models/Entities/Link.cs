@@ -1,4 +1,6 @@
-﻿namespace Readit.Models.Entities
+﻿using MySql.Data.Types;
+
+namespace Readit.Models.Entities
 {
     public class Link
     {
@@ -8,6 +10,7 @@
         public string Description { get; set; }
         public int UpVote { get; set; }
         public int DownVote { get; set; }
+        public MySqlDateTime Publication { get; set; }
         public int Score { get
             {
                 return UpVote - DownVote;
