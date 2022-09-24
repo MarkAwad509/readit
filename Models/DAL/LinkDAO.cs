@@ -174,6 +174,31 @@ namespace Readit.Models.DAO
             return voted;
         }
 
+        public bool UpdateLink(Link link) {
+            bool result = false;
+            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            try {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand("UPDATE Link SET Member_ID=@memberId,Title=@title,Description=@description,UpVote_Amount=@upvote,DownVote_Amount=@downvote,Publication_Date=@publicationDate  WHERE ID=@id", connection);
+                command.Parameters.Add(new MySqlParameter("@id", link.ID));
+                command.Parameters.Add(new MySqlParameter("@memberId", link.Publisher.ID));
+                command.Parameters.Add(new MySqlParameter("@title", link.Title));
+                command.Parameters.Add(new MySqlParameter("@description", link.Description));
+                command.Parameters.Add(new MySqlParameter("@upvote", link.UpVote));
+                command.Parameters.Add(new MySqlParameter("@downvote", link.DownVote));
+                command.Parameters.Add(new MySqlParameter("@publicationDate", link.PublicationDate));
+                int rows = command.ExecuteNonQuery();
+                if (rows > 0)
+                    result = true;
+            } catch (Exception) {
+                throw;
+            } finally {
+                connection.Close();
+            }
+
+            return result;
+        }
+
         public bool DeleteLink(Link link) {
             bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);

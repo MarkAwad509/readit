@@ -7,7 +7,5 @@ namespace Readit.Controllers
         public IActionResult Index() {
             return View();
         }
-
-    }
     }
 }

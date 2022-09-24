@@ -15,7 +15,7 @@ namespace Readit.Models.DAO
             this.dbContext = new DbContext(configuration);
         }
 
-        public bool addMember(Member member)
+        public bool AddMember(Member member)
         {
             bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
@@ -24,7 +24,7 @@ namespace Readit.Models.DAO
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("INSERT INTO Member" +
                     "(Username, Email, Password)" +
-                    "\r\nVALUES (@username, @email, @password);");
+                    "\r\nVALUES (@username, @email, @password);", connection);
                 command.Parameters.Add(new MySqlParameter("@username", member.Username));
                 command.Parameters.Add(new MySqlParameter("@email", member.Email));
                 command.Parameters.Add(new MySqlParameter("@password", member.Password));
