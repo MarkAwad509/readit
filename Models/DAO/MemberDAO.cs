@@ -85,6 +85,7 @@ namespace Readit.Models.DAO
                 MySqlCommand command = new MySqlCommand("SELECT * FROM Member WHERE ID=@id", connection);
                 command.Parameters.Add(new MySqlParameter("@ID", id));
                 MySqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.Read()) { 
                 found = new Member()
                 {
                     ID = dataReader.GetInt32("ID"),
@@ -92,6 +93,11 @@ namespace Readit.Models.DAO
                     Email = dataReader.GetString("Email"),
                     Password = dataReader.GetString("Password")
                 };
+                }
+                else
+                {
+                    found = null;
+                }
             }
             catch (Exception)
             {
@@ -114,23 +120,33 @@ namespace Readit.Models.DAO
                 MySqlCommand command = new MySqlCommand("SELECT * FROM Member WHERE Email=@email", connection);
                 command.Parameters.Add(new MySqlParameter("@email", email));
                 MySqlDataReader dataReader = command.ExecuteReader();
-                found = new Member()
+                if (dataReader.Read())
                 {
-                    ID = dataReader.GetInt32("ID"),
-                    Username = dataReader.GetString("Username"),
-                    Email = dataReader.GetString("Email"),
-                    Password = dataReader.GetString("Password")
-                };
-            }
+                    found = new Member()
+                    {
+                        ID = dataReader.GetInt32("ID"),
+                        Username = dataReader.GetString("Username"),
+                        Email = dataReader.GetString("Email"),
+                        Password = dataReader.GetString("Password")
+                    };
+                }else{
+                    found = null;
+                }
+            
+
+
+            } 
             catch (Exception)
             {
                 throw;
             }
             finally
             {
+
                 connection.Close();
             }
             return found;
+
         }
 
         public Member GetMemberByUsername(string username)
@@ -143,6 +159,7 @@ namespace Readit.Models.DAO
                 MySqlCommand command = new MySqlCommand("SELECT * FROM Member WHERE Username=@username", connection);
                 command.Parameters.Add(new MySqlParameter("@username", username));
                 MySqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.Read()) { 
                 found = new Member()
                 {
                     ID = dataReader.GetInt32("ID"),
@@ -150,6 +167,11 @@ namespace Readit.Models.DAO
                     Email = dataReader.GetString("Email"),
                     Password = dataReader.GetString("Password")
                 };
+                }
+                else
+                {
+                    found = null;
+                }
             }
             catch (Exception)
             {
