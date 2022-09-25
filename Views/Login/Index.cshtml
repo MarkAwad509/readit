@@ -7,33 +7,41 @@
 <div style="text-align:left" class="grid-container">
 
     <div name="LoginService">
-        <br/>
-        <br/>
+        <br />
+        <br />
         <h1 class="Comingback">Coming back?</h1>
         <div class="e1_74">
-        <form  name="LoginForm" action="/login/data" method="get">
-                <br/>
-                <br/>
-                <div style="text-align:center" name="inputs">
-                <div style="padding-left:60px"  class="e1_59">
-                <label class="ei1_59_1_7" for="username">Username</label>
-                <br/>
-                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <br/>
-                <div style="padding-left:60px" class="e1_59">
-                <label class="ei1_59_1_7" for="password">Password</label>
+            <form name="LoginForm" action="/login/Login" method="get">
                 <br />
-                <input type="password" name="password" class="form-control" style="" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
+                @if (ViewBag.Alert != null) {
+                    <script type="text/javascript">
+                        window.onload = function() {
+                            alert("@ViewBag.Alert");
+                        };
+                    </script>
+                }
+
+                <br />
+                <div style="text-align:center" name="inputs">
+                    <div style="padding-left:60px" class="e1_59">
+                        <label class="ei1_59_1_7" for="Email">Email</label>
+                        <br />
+                        <input type="text" name="Email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                    </div>
+                    <br />
+                    <div style="padding-left:60px" class="e1_59">
+                        <label class="ei1_59_1_7" for="password">Password</label>
+                        <br />
+                        <input type="password" name="password" class="form-control" style="" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
+                    </div>
                 </div>
-                </div>
-                <br/>
-                <div style="margin-left:145px" class="e1_67"><span  type="submit" onclick="LoginForm.submit()" class="ei1_67_1_27">Login</span></div>
-                <br/>
-                <br/>
+                <br />
+                <div style="margin-left:145px" class="e1_67"><span type="submit" onclick="LoginForm.submit()" class="ei1_67_1_27">Login</span></div>
+                <br />
+                <br />
             </form>
-            <br/>
-            <p style="padding-right:60px">New to ReadIT ?<a style="font-family:Passion one" href="Inscription/index"> Sign-up here</a></p>
+            <br />
+            <p style="padding-right:60px">New to ReadIT ?<a style="font-family:Passion one" href="Inscription"> Sign-up here</a></p>
         </div>
 
 

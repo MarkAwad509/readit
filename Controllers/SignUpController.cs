@@ -7,9 +7,15 @@ namespace Readit.Controllers {
             return View();
         }
 
-        public IActionResult CreateUser() {
-            return RedirectToAction("Index","Home");
-            //return View("../Home/Index");
+        public IActionResult CreateMember(string Username, string Email, string Password) {
+            var member = new Member(Username, Email, Password);
+            if (mDAO.AddMember(member)) {
+                ViewBag.connectedUser = member;
+                return RedirectToAction("isLoggedIn", "Home");
+            }
+            else {
+                return View();
+            }
         }
     }
 }
