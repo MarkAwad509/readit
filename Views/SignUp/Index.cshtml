@@ -1,4 +1,4 @@
-﻿@model Readit.Models.Entities.User
+﻿@model Readit.Models.Entities.Member
 
 @{
     ViewData["Title"] = "Sign Up";
@@ -12,32 +12,31 @@
         <div class="col">
             <br />
             <h1 class="welcome-title">Welcome, new user.</h1>
-            <form class="form-control" 
+            <form class="form-control needs-validation" 
                 style="background-color:#D9D9D9; width: 584px; height: 540px; border-radius: 30px; position relative;" 
                 asp-controller="SignUp"
-                asp-action="CreateUser"
+                asp-action="CreateMember"
                 method="post">
                 <br />
                 <div class="form-group username-group ">
                     <label for="Username" class="input-label">Username</label>
-                    <input type="text" class="form-control input-full" placeholder="Username" required>
+                    <input asp-for="Username" type="text" class="form-control input-full" placeholder="Username" required b-1hx6fbnuan>
                     <br />
                 </div>
                 <div class="form-group email-group">
                     <label for="Email" class="input-label">E-mail</label>
-                    <input type="email" class="form-control input-full" aria-describedby="emailHelp" placeholder="E-mail" required>
+                    <input asp-for="Email" type="email" class="form-control input-full" aria-describedby="emailHelp" placeholder="E-mail" required b-1hx6fbnuan>
                     <br />
 
                 </div>
                 <div class="form-group password-group row">
                     <div class="col">
-                        <label for="password" class="input-label">Password</label>
-                        <input for="password" type="password" id="password-input" class="form-control input-half" placeholder="Password" required>
+                        <label for="Password" class="input-label" b-1hx6fbnuan>Password</label>
+                        <input asp-for="Password" type="password" id="password-input input-half" class="form-control input-half" placeholder="Password" required b-1hx6fbnuan>
                     </div>
                     <div class="col">
-                        <label for="password-confirm" class="input-label">Confirm Password</label>
-                        <input for="password-confirm" type="password" id="confirm-password-input" class="form-control input-half" placeholder="Confirm Password" required>
-                        <div id="err-mess" class="invalid-feedback"></div>
+                        <label for="Password-confirm" class="input-label">Confirm Password</label>
+                        <input for="Password-confirm" type="password" id="confirm-password-input" class="form-control input-half" placeholder="Confirm Password" required>
                     </div>
                 </div>
                 <div class="form-group submit-group">
