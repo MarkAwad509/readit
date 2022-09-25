@@ -14,20 +14,6 @@ namespace Readit.Controllers {
             return View();
         }
 
-        public IActionResult Login(string Email, string password)
-        {
-          Member currentUser = memberDAO.GetMemberByEmail(Email);
-         if(currentUser == null || currentUser.Password != password)
-            {
-                ViewBag.Alert = String.Format("Wrong Email or Password please try again");
-                return View("Index");
-            }
-            else
-            {
-                ViewBag.connectedUser=currentUser;
-                return View("..\\..\\Views\\Home\\Index");
-            }
-
         public IActionResult Login(string Email, string password) {
             Member currentUser = memberDAO.GetMemberByEmail(Email);
             if (currentUser == null || currentUser.Password != password) {
@@ -36,10 +22,10 @@ namespace Readit.Controllers {
             }
             else {
                 ViewBag.connectedUser = currentUser;
-                return RedirectToAction("Index", "Home");
+                return View("..\\..\\Views\\Home\\Index");
             }
 
-    }
+        }
     }
 }
 
