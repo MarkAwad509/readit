@@ -2,15 +2,12 @@
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Readit.Models;
 using System.Diagnostics;
+namespace Readit.Controllers {
+    public class HomeController : Controller {
 
-namespace projetwebserver.Controllers
-{
-    public class HomeController : Controller
-    {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
+        public HomeController(ILogger<HomeController> logger) {
             _logger = logger;
         }
 

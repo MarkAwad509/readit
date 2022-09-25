@@ -1,8 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Readit.Models;
+using Readit.Models.DAO;
+using Readit.Models.Entities;
 
 namespace Readit.Controllers {
     public class SignUpController : Controller {
+        MemberDAO mDAO;
+
+        public SignUpController(IConfiguration configuration) {
+            this.mDAO = new MemberDAO(configuration);
+        }
+
         public IActionResult Index() {
             return View();
         }
