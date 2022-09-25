@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Readit.Models;
 using Readit.Models.DAO;
@@ -36,10 +36,8 @@ namespace Readit.Controllers
             return View();
         }
 
-        /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }*/
+        public IActionResult isLoggedIn() {
+            return View("Index");
+        }
     }
 }

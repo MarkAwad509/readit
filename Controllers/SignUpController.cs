@@ -16,7 +16,9 @@ namespace Readit.Controllers {
         [HttpPost]
         public IActionResult CreateMember(string Username, string Email, string Password) {
             var member = new Member(Username, Email, Password);
+
             return mDAO.AddMember(member) ? RedirectToAction("Index","Home",new {Member = member.Username}) : View();
+
         }
     }
 }
