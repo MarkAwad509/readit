@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Readit.Models.DAO;
 using Readit.Models.Entities;
+using System.Diagnostics.Metrics;
 
 namespace Readit.Controllers {
     public class LoginController : Controller {
@@ -20,9 +21,11 @@ namespace Readit.Controllers {
                 ViewBag.Alert = String.Format("Wrong Email or Password please try again");
                 return View("Index");
             }
-            else {
-                ViewBag.connectedUser = currentUser;
-                return View("..\\..\\Views\\Home\\Index");
+            else
+            {
+                ViewBag.connectedUser=currentUser;
+                return RedirectToAction("Index", "Home", new { Member = currentUser.Username });
+
             }
 
         }

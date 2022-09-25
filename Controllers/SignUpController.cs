@@ -13,16 +13,12 @@ namespace Readit.Controllers {
         public IActionResult Index() {
             return View();
         }
-
+        [HttpPost]
         public IActionResult CreateMember(string Username, string Email, string Password) {
             var member = new Member(Username, Email, Password);
-            if (mDAO.AddMember(member)) {
-                ViewBag.connectedUser = member;
-                return RedirectToAction("isLoggedIn", "Home");
-            }
-            else {
-                return View();
-            }
+
+            return mDAO.AddMember(member) ? RedirectToAction("Index","Home",new {Member = member.Username}) : View();
+
         }
     }
 }
