@@ -1,31 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Readit.Models;
+using Readit.Models.DAO;
 using System.Diagnostics;
-namespace Readit.Controllers {
-    public class HomeController : Controller {
-
+namespace Readit.Controllers
+{
+    public class HomeController : Controller
+    {
+        MemberDAO memberDAO;
+        
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger) {
+        public HomeController(ILogger<HomeController> logger,IConfiguration configuration)
+        {
             _logger = logger;
+            memberDAO = new MemberDAO(configuration);
         }
 
-        public IActionResult Index() {
+        public ActionResult Index(string Member) {
 
-
-            if (ViewBag.connectedUser.ID != null) {
-                ViewBag.connectedUser = ViewBag.connectedUser;
+            if (Member != null)
+            {
+                ViewBag.connectedUser = memberDAO.GetMemberByUsername(Member);
                 return View();
             }
             else {
-
-                return RedirectToAction("Index", "Login");
+             
+                return RedirectToAction("Index","Login");
             }
-
+            
         }
 
-        public IActionResult Privacy() {
+        public IActionResult Privacy()
+        {
             return View();
         }
 

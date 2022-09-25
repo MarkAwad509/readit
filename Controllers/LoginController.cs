@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Readit.Models.DAO;
 using Readit.Models.Entities;
+using System.Diagnostics.Metrics;
 
 namespace Readit.Controllers
 {
@@ -28,7 +29,7 @@ namespace Readit.Controllers
             else
             {
                 ViewBag.connectedUser=currentUser;
-                return View("..\\..\\Views\\Home\\Index");
+                return RedirectToAction("Index", "Home", new { Member = currentUser.Username });
             }
 
         }
