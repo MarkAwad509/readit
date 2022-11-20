@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Sign Up";
+    Layout = "~/Views/Shared/_UnLoggedLayout.cshtml";
 }
 <div class="container">
     <div class="row">
@@ -45,7 +46,7 @@
                     <button type="submit" onclick="confirmPassword()" class="btn submit-btn">Register</button>
                     <br />
 
-                    <a href="Login/Index" class="login-redirect">Already have an account? Login here</a>
+                    <p class="login-redirect">Already have an account?<a href="Login/Index" > Login here</a></p>
                 </div>
             </form>
         </div>

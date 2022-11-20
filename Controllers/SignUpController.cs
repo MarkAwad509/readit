@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Readit.Models.DAO;
 using Readit.Models.Entities;
-
+using Microsoft.AspNetCore.Http;
 namespace Readit.Controllers {
     public class SignUpController : Controller {
         MemberDAO mDAO;
-
-        public SignUpController(IConfiguration configuration) {
+        private readonly ISession _session;
+        public SignUpController(IConfiguration configuration,IHttpContextAccessor httpContextAccessor) {
             this.mDAO = new MemberDAO(configuration);
+            _session = httpContextAccessor.HttpContext.Session;
         }
 
         public IActionResult Index() {

@@ -1,19 +1,23 @@
 ﻿using MySql.Data.MySqlClient;
 using Readit.Models.Entities;
 using System;
-
-namespace Readit.Models.DAO {
+using Readit.Models.DAL;
+namespace Readit.Models.DAO
+{
     public class MemberDAO {
         private readonly IConfiguration configuration;
-        public DbContext dbContext { get; set; }
+        public mproulx_5w6_readitContext dbContext { get; set; }
 
         public MemberDAO(IConfiguration _configuration) {
             this.configuration = _configuration;
-            this.dbContext = new DbContext(configuration);
+            this.dbContext = new mproulx_5w6_readitContext();
         }
 
         public bool AddMember(Member member) {
-            bool result = false;
+           dbContext.Add<Member>(member);
+            dbContext.SaveChanges();
+            return true;
+            /*bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -31,11 +35,12 @@ namespace Readit.Models.DAO {
             } finally {
                 connection.Close();
             }
-            return result;
+            return result;*/
         }
 
         public IList<Member> GetMembers() {
-            IList<Member> members = new List<Member>();
+            return dbContext.Members.ToList();
+            /*IList<Member> members = new List<Member>();
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -55,38 +60,14 @@ namespace Readit.Models.DAO {
             } finally {
                 connection.Close();
             }
-            return members;
+            return members;*/
         }
 
-        public Member GetMemberByID(int id) {
-            Member found;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT * FROM Member WHERE ID=@id", connection);
-                command.Parameters.Add(new MySqlParameter("@ID", id));
-                MySqlDataReader dataReader = command.ExecuteReader();
-                if (dataReader.Read()) {
-                    found = new Member() {
-                        ID = dataReader.GetInt32("ID"),
-                        Username = dataReader.GetString("Username"),
-                        Email = dataReader.GetString("Email"),
-                        Password = dataReader.GetString("Password")
-                    };
-                }
-                else {
-                    found = null;
-                }
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            return found;
-        }
 
         public Member GetMemberByEmail(string email) {
-            Member found;
+
+            return dbContext.Members.Where(e => e.Email == email).First();
+            /*Member found;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -113,35 +94,9 @@ namespace Readit.Models.DAO {
 
                 connection.Close();
             }
-            return found;
+            return found;*/
 
         }
 
-        public Member GetMemberByUsername(string username) {
-            Member found;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT * FROM Member WHERE Username=@username", connection);
-                command.Parameters.Add(new MySqlParameter("@username", username));
-                MySqlDataReader dataReader = command.ExecuteReader();
-                if (dataReader.Read()) {
-                    found = new Member() {
-                        ID = dataReader.GetInt32("ID"),
-                        Username = dataReader.GetString("Username"),
-                        Email = dataReader.GetString("Email"),
-                        Password = dataReader.GetString("Password")
-                    };
-                }
-                else {
-                    found = null;
-                }
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            return found;
-        }
     }
 }

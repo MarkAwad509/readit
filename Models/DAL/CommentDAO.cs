@@ -1,24 +1,28 @@
 ﻿using MySql.Data.MySqlClient;
 using Readit.Models.Entities;
-
-namespace Readit.Models.DAO {
+using Readit.Models.DAL;
+namespace Readit.Models.DAO
+{
     public class CommentDAO {
 
-        private readonly IConfiguration configuration;
-        public DbContext dbContext { get; set; }
+        private readonly IConfiguration _configuration;
+        public mproulx_5w6_readitContext dbContext { get; set; }
         private MemberDAO mDAO;
         private LinkDAO lDAO;
 
         public CommentDAO(IConfiguration _configuration) {
-            this.configuration = _configuration;
-            this.dbContext = new DbContext(this.configuration);
-            this.mDAO = new MemberDAO(this.configuration);
-            this.lDAO = new LinkDAO(this.configuration);
+            this._configuration = _configuration;
+            this.dbContext = new mproulx_5w6_readitContext();
+            this.mDAO = new MemberDAO(this._configuration);
+            this.lDAO = new LinkDAO(this._configuration);
 
         }
 
-        public bool AddComment(Comment comment) {
-            bool result = false;
+        public void AddComment(Comment comment) {
+            dbContext.Add<Comment>(comment);
+            dbContext.SaveChanges();
+            // return true;
+           /* bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -38,11 +42,13 @@ namespace Readit.Models.DAO {
                 connection.Close();
             }
 
-            return result;
+            return result;*/
         }
 
         public IList<Comment> GetCommentsByLink(int linkId) {
-            IList<Comment> comments = new List<Comment>();
+            return dbContext.Comments.Where(c => c.LinkId == linkId).ToList();
+            
+            /*IList<Comment> comments = new List<Comment>();
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -66,6 +72,7 @@ namespace Readit.Models.DAO {
             }
 
             return comments;
-        }
+        */
+            }
     }
 }
