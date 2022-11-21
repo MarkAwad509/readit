@@ -17,7 +17,10 @@ namespace Readit.Models.DAO
             this.mDAO = new MemberDAO(this.configuration);
             connectionString = configuration.GetConnectionString("Db");
         }
-
+        public List<Link> getLinks()
+        {
+            return dbContext.Links.ToList();
+        }
         public void AddLink(Link link){
             dbContext.Add<Link>(link);
             dbContext.SaveChanges();

@@ -11,6 +11,7 @@ namespace Readit.Controllers
     public class HomeController : Controller
     {
         MemberDAO memberDAO;
+        LinkDAO linkDAO;
         private readonly ISession _session;
         private readonly ILogger<HomeController> _logger;
 
@@ -18,6 +19,7 @@ namespace Readit.Controllers
         {
             _logger = logger;
             memberDAO = new MemberDAO(configuration);
+            linkDAO = new LinkDAO(configuration);
             _session = httpContextAccessor.HttpContext.Session;
         }
 
@@ -26,13 +28,41 @@ namespace Readit.Controllers
             if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!=null)
             {
                 ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
-                return View("Index");
+                return View("Index",linkDAO.getLinks());
             }
             else {
              
                 return RedirectToAction("Index","Login");
             }
             
+        }
+        public IActionResult AjoutLien()
+        {
+            return View();
+        }
+        public IActionResult AjouterUnLien(string Title,string Description)
+        {
+            
+            Link link = new Link()
+            {
+                Title = Title,
+                Description = Description,
+                MemberId = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id,
+                UpVote = 0,
+                DownVote = 0,
+                PublicationDate = DateTime.Now
+            };
+            linkDAO.AddLink(link);
+            /*
+        public int? MemberId { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public int? UpVote { get; set; }
+        public int? DownVote { get; set; }
+        public DateTime? PublicationDate { get; set; }
+             */
+            
+            return View("Index", linkDAO.getLinks());
         }
         public IActionResult Logout()
         {

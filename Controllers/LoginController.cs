@@ -27,7 +27,11 @@ namespace Readit.Controllers {
             }
             else
             {
-                _session.SetString("user", JsonConvert.SerializeObject(currentUser));   
+           
+                _session.SetString("user", JsonConvert.SerializeObject(currentUser, Formatting.None, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling= ReferenceLoopHandling.Ignore
+                }));
                 return RedirectToAction("Index", "Home");
 
             }

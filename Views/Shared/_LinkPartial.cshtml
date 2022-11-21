@@ -1,0 +1,18 @@
+﻿@using Readit.Models.Entities;
+@model Link
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+.Link{
+        border: 2px solid;
+        border-radius: 8px;
+        padding: 5px;
+}
+</style>
+<div class="Link">
+    <span> <h1 style="display:inline;">@Model.Title <h3 style="display:inline; padding-left:500px "> @Model.PublicationDate     Published by: @Model.Member.Username</h3> </h1></span>
+    <p>@Model.Description</p>
+</div>

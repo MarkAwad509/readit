@@ -1,9 +1,14 @@
-﻿@{
+﻿@using Readit.Models.Entities;
+@model IEnumerable<Link>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Home Page";
 }
+<h1>Links</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <a asp-action="AjoutLien">Ajouter un lien</a>
+ @foreach(var item in Model){
+     <partial name="_LinkPartial" model="item"/>
+ }
+
 </div>
