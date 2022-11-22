@@ -57,23 +57,15 @@ namespace Readit.Controllers
                 DownVote = 0,
                 PublicationDate = DateTime.Now
             };
-            linkDAO.AddLink(link);
-            /*
-        public int? MemberId { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public int? UpVote { get; set; }
-        public int? DownVote { get; set; }
-        public DateTime? PublicationDate { get; set; }
-             */
-            
+            linkDAO.AddLink(link);            
             return View("Index", linkDAO.getLinks());
         }
-        public IActionResult Logout()
-        {
-            _session.SetString("user", "NULL");
-            return View("Index", "Login");
+
+        public IActionResult Logout(){
+            _session.Clear();
+            return RedirectToAction("Index", "Login");
         }
+
         public IActionResult Privacy()
         {
             return View();

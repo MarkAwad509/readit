@@ -22,12 +22,11 @@ namespace Readit.Controllers {
         public IActionResult Login(string Email, string password) {
             Member currentUser = memberDAO.GetMemberByEmail(Email);
             if (currentUser == null || currentUser.Password != password) {
-                ViewBag.Alert = String.Format("Wrong Email or Password please try again");
+                ViewBag.Alert = String.Format("Wrong email or password, please try again.");
                 return View("Index");
             }
             else
             {
-           
                 _session.SetString("user", JsonConvert.SerializeObject(currentUser, Formatting.None, new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling= ReferenceLoopHandling.Ignore
