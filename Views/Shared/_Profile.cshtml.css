@@ -1,0 +1,14 @@
+﻿.user-card{
+    width: 18rem;
+    height: 30rem;
+}
+
+.icon{
+    width:16px;
+    height:16px;
+    fill:currentColor
+}
+
+.stats{
+    display:inline;
+}
