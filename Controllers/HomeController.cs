@@ -27,7 +27,7 @@ namespace Readit.Controllers
             
             if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!=null)
             {
-                ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+                ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
                 return View("Index",linkDAO.getLinks());
             }
             else {
@@ -35,6 +35,11 @@ namespace Readit.Controllers
                 return RedirectToAction("Index","Login");
             }
             
+        }
+        public IActionResult Delete(int Id)
+        {
+            linkDAO.DeleteLink(linkDAO.GetLinkByID(Id));
+            return View("Index");
         }
         public IActionResult AjoutLien()
         {
@@ -66,7 +71,7 @@ namespace Readit.Controllers
         }
         public IActionResult Logout()
         {
-            _session.SetString("user", null);
+            _session.SetString("user", "NULL");
             return View("Index", "Login");
         }
         public IActionResult Privacy()

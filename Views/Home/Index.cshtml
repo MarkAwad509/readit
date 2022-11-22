@@ -2,13 +2,15 @@
 @model IEnumerable<Link>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["user"] = ViewBag.connectedUser;
 }
 <h1>Links</h1>
 
 <div>
     <a asp-action="AjoutLien">Ajouter un lien</a>
  @foreach(var item in Model){
-     <partial name="_LinkPartial" model="item"/>
+       
+        <partial name="_LinkPartial" model="item" view-data="ViewData" />
  }
 
 </div>
