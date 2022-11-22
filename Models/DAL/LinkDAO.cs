@@ -186,6 +186,7 @@ namespace Readit.Models.DAO
 
         public void DeleteLink(Link link) {
             dbContext.Links.Remove(link);
+            
             foreach (var item in dbContext.Comments)
             {
                 if (item.LinkId == link.Id)
