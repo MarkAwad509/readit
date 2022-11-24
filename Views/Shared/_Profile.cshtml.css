@@ -1,12 +1,25 @@
 ﻿.user-card{
     width: 18rem;
-    height: 30rem;
+    height: fit-content;
+    float: right;
 }
 
 .icon{
     width:16px;
     height:16px;
     fill:currentColor
+}
+
+.stats-container {
+    display: block;
+    float: left;
+    margin: 10px 10px 0 0;
+    padding: 5px 10px
+}
+
+.stats-group{
+    display:inline;
+    padding-right: 10px;
 }
 
 .stats{
