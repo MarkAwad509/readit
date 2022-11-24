@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Readit.Models.Entities;
+using Readit.Models.DAL;
 
 namespace Readit.Controllers
 {
@@ -12,6 +13,7 @@ namespace Readit.Controllers
     {
         MemberDAO memberDAO;
         LinkDAO linkDAO;
+        CommentDAO commentDAO;
         private readonly ISession _session;
         private readonly ILogger<HomeController> _logger;
 
@@ -20,12 +22,13 @@ namespace Readit.Controllers
             _logger = logger;
             memberDAO = new MemberDAO(configuration);
             linkDAO = new LinkDAO(configuration);
+            commentDAO = new CommentDAO(configuration);
             _session = httpContextAccessor.HttpContext.Session;
         }
 
         public ActionResult Index() {
             
-            if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!=null)
+            if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!="")
             {
                 ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
                 return View("Index",linkDAO.getLinks());
@@ -43,16 +46,20 @@ namespace Readit.Controllers
         }
         public IActionResult ViewLink(int Id)
         {
+            ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
             return View(linkDAO.GetLinkByID(Id));
         }
         public IActionResult AjoutLien()
         {
+            return View();
+        }
 
+        public IActionResult Create()
+        {
             return View();
         }
         public IActionResult AjouterUnLien(string Title,string Description)
         {
-            
             Link link = new Link()
             {
                 Title = Title,
@@ -62,17 +69,29 @@ namespace Readit.Controllers
                 DownVote = 0,
                 PublicationDate = DateTime.Now
             };
-            linkDAO.AddLink(link);
-            /*
-        public int? MemberId { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public int? UpVote { get; set; }
-        public int? DownVote { get; set; }
-        public DateTime? PublicationDate { get; set; }
-             */
-            
+            linkDAO.AddLink(link);  
             return RedirectToAction("Index");
+        }
+
+        public IActionResult PublierCommentaire(int linkid, int memberid, string comment)
+        {
+            var verification = comment.Split(" ");
+            if (comment != "" | verification.Count() == 0)
+            {
+                Comment commentaire = new Comment()
+                {
+                    LinkId = linkid,
+                    MemberId = memberid,
+                    Content = comment,
+                    PublicationDate = DateTime.Now
+                };
+                commentDAO.AddComment(commentaire);
+            }
+            else
+            {
+                ViewBag.Alert = String.Format("Votre commentaire doit contenir au minimum un charactère");
+            }
+            return RedirectToAction("ViewLink", new { Id = linkid });
         }
         public IActionResult Logout()
         {
