@@ -27,5 +27,10 @@ namespace Readit.Controllers {
                 count = count + (int)(link.UpVote - link.DownVote);
             return count;
         }
+
+        public IActionResult EditProfile() {
+            ViewBag.CurrentMember = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            return View("ProfileEdit");
+        }
     }
 }
