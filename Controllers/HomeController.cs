@@ -39,10 +39,15 @@ namespace Readit.Controllers
         public IActionResult Delete(int Id)
         {
             linkDAO.DeleteLink(linkDAO.GetLinkByID(Id));
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+        public IActionResult ViewLink(int Id)
+        {
+            return View(linkDAO.GetLinkByID(Id));
         }
         public IActionResult AjoutLien()
         {
+
             return View();
         }
         public IActionResult AjouterUnLien(string Title,string Description)
@@ -57,11 +62,12 @@ namespace Readit.Controllers
                 DownVote = 0,
                 PublicationDate = DateTime.Now
             };
-            linkDAO.AddLink(link);            
-            return View("Index", linkDAO.getLinks());
+            linkDAO.AddLink(link);
+            
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Logout(){
+        public IActionResult Logout(){            
             _session.Clear();
             return RedirectToAction("Index", "Login");
         }
