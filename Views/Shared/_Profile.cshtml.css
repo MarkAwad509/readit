@@ -3,6 +3,7 @@
     height: 30rem;
     float: initial;
     z-index: 1;
+    position:relative;
 }
 
 .icon{
@@ -43,11 +44,14 @@
     position:initial;
 }
 
-.reading-time-img {
-    position:relative;
-    top:30%;
-    left:30%;
+.img-container > img {
+    position: absolute !important;
+    top: -500px !important;
     height: 554px;
     width: 734px;
-    z-index:2;
+    z-index: 2;
+}
+
+.img-container{
+    position:relative;
 }
