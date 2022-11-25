@@ -1,7 +1,8 @@
-﻿.user-card{
+﻿.user-card {
     width: 18rem;
     height: 30rem;
-    float: right;
+    float: initial;
+    z-index: 1;
 }
 
 .icon{
@@ -31,4 +32,22 @@
         width: 18rem;
         height: 25rem;
     }
+}
+
+.links-title{
+    color:#2D2B2B;
+    width: fit-content;
+    height: fit-content;
+    font-size:64px;
+    margin-left:3px;
+    position:initial;
+}
+
+.reading-time-img {
+    position:relative;
+    top:30%;
+    left:30%;
+    height: 554px;
+    width: 734px;
+    z-index:2;
 }
