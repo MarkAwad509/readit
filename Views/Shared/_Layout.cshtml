@@ -21,14 +21,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav navbar">
                         <li class="nav-item">
                             <a style="font-family:Passion One" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item"> 
                             <a class="nav-link text-dark" asp-controller="Profile" asp-action="ProfileView">Profile</a>
                         </li>
-                        <li class="nav-item" >
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>
                     </ul>

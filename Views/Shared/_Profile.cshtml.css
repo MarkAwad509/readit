@@ -1,6 +1,6 @@
 ﻿.user-card{
     width: 18rem;
-    height: fit-content;
+    height: 30rem;
     float: right;
 }
 
@@ -24,4 +24,11 @@
 
 .stats{
     display:inline;
+}
+
+@media screen and (max-width: 1366px) {
+    .user-card {
+        width: 18rem;
+        height: 25rem;
+    }
 }
