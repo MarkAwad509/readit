@@ -4,12 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
 }
-<h1>Links</h1>
-<div>
-    <a asp-action="AjoutLien">Ajouter un lien</a>
+
+
+<h1 style="text-align:center;">Links</h1>
+<div class="newlink">
+<a  style="margin-bottom:5px;decoration:none;color:black;" asp-action="AjoutLien">publier un nouveau lien</a>
+</div>
+<div class="row">
+    
+    <div class="column" style="float:left;width:250px;height:700px;">
+        <img style="width:250px;height:700px;" src="~/images/undraw_Add_file_re_s4qf 1.svg" />
+    </div>
+
+<div class="column" style="width:780px;">
+<div class="LinkContainer" >
  @foreach(var item in Model){
-       
-        <partial name="_LinkPartial" model="item" view-data="ViewData" />
+      <div style="margin-left:3px;margin-top:5px">
+        <partial  name="_LinkPartial" model="item" view-data="ViewData" />
+      </div>
  }
+           
+ </div>
+ </div>
+
+
+
+
+    <div class="column" style="float:right;width:250px;height:700px;">
+        <img style="width:250px;height:700px;" src="~/images/undraw_Social_girl_re_kdrx 1.svg" />
+ </div>
 
 </div>

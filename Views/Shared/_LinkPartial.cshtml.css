@@ -5,6 +5,8 @@
     width: 750px;
     height: auto;
     overflow: hidden;
+    background-color: lightgray;
+    align-content:flex-start;
 }
 
 .Title {

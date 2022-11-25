@@ -1,0 +1,16 @@
+﻿
+.LinkContainer {
+    border: 2px solid;
+    border-radius: 8px;
+    background-color: grey;
+    width: 780px;
+    padding: 10px;
+}
+
+.newlink {
+    background-color: gray;
+    border: 2px solid;
+    border-radius: 8px;
+    width: 100px;
+    margin-bottom: 10px;
+}

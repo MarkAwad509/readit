@@ -24,10 +24,10 @@ namespace Readit.Controllers
         }
 
         public ActionResult Index() {
-            
-            if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!=null)
+            Member member = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            if (member.Email!=null)
             {
-                ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
+                ViewBag.connectedUser = member.Id;
                 return View("Index",linkDAO.getLinks());
             }
             else {
@@ -35,6 +35,21 @@ namespace Readit.Controllers
                 return RedirectToAction("Index","Login");
             }
             
+        }
+
+        public IActionResult Thumbs(int LinkId,int MemberId,int updown)
+        {
+
+            linkDAO.AddVote(LinkId,MemberId,updown);
+
+            return RedirectToAction("Index");
+
+        }
+        public IActionResult ThumbsUpdate(int LinkId)
+        {
+            linkDAO.updateVote( JsonConvert.DeserializeObject<Member>(_session.GetString("user")), linkDAO.GetLinkByID(LinkId));
+            return RedirectToAction("Index");
+
         }
         public IActionResult Delete(int Id)
         {
