@@ -1,0 +1,53 @@
+﻿.user-card {
+    width: 18rem;
+    height: 30rem;
+    float: initial;
+    z-index: 1;
+}
+
+.icon{
+    width:16px;
+    height:16px;
+    fill:currentColor
+}
+
+.stats-container {
+    display: block;
+    float: left;
+    margin: 10px 10px 0 0;
+    padding: 5px 10px
+}
+
+.stats-group{
+    display:inline;
+    padding-right: 10px;
+}
+
+.stats{
+    display:inline;
+}
+
+@media screen and (max-width: 1366px) {
+    .user-card {
+        width: 18rem;
+        height: 25rem;
+    }
+}
+
+.links-title{
+    color:#2D2B2B;
+    width: fit-content;
+    height: fit-content;
+    font-size:64px;
+    margin-left:3px;
+    position:initial;
+}
+
+.reading-time-img {
+    position:relative;
+    top:30%;
+    left:30%;
+    height: 554px;
+    width: 734px;
+    z-index:2;
+}
