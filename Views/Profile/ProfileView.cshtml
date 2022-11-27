@@ -1,0 +1,7 @@
+﻿@model Readit.Models.Entities.Member
+@{
+    ViewData["CommentCount"] = ViewBag.CommentCount;
+    ViewData["PostCount"] = ViewBag.PostCount;
+    ViewData["LikesCount"] = ViewBag.LikesCount;
+}
+<partial name="_Profile" model="@Model" view-data="ViewData"/>

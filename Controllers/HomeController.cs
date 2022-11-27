@@ -53,15 +53,10 @@ namespace Readit.Controllers
             ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
             return View(linkDAO.GetLinkByID(Id));
         }
-        public IActionResult AjoutLien()
-        {
+        public IActionResult Create(){
             return View();
         }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
+        
         public IActionResult AjouterUnLien(string Title,string Description)
         {
             Link link = new Link()
@@ -75,8 +70,8 @@ namespace Readit.Controllers
             };
             linkDAO.AddLink(link);  
             return RedirectToAction("Index");
-        }
-
+        }        
+        
         public IActionResult PublierCommentaire(int linkid, int memberid, string comment)
         {
             if (comment != null )
@@ -96,15 +91,16 @@ namespace Readit.Controllers
             }
             else
             {
-                ViewBag.Alert = String.Format("Votre commentaire doit contenir au minimum un charactère");
+                ViewBag.Alert = String.Format("Votre commentaire doit contenir au minimum un charactÃ¨re");
             }
             return RedirectToAction("ViewLink", new { Id = linkid });
         }
-        public IActionResult Logout()
-        {
+        
+        public IActionResult Logout(){
             _session.Clear();
             return RedirectToAction("Index", "Login");
         }
+
         public IActionResult Privacy()
         {
             return View();
