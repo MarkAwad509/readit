@@ -3,25 +3,26 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
-    ViewData["Title"] = "Home Page";
 }
-<div>
-    <div class="bg-light" style="height:100%">
-        <br />
-        <div class="row d-flex justify-content-center">
-            <div class="rounded-1 card bg-secondary" style="width:90vw;cursor:pointer">
-                <div class="card-body text-white">
-                    &nbsp;&nbsp;<h4 class="float-start">Publier</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a asp-action="Create" style="vertical-align:middle">
-                        <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br />
+
+<div class="row">
+
+    <div class="column img-container-left">
+        <img style="width:250px;height:700px;" src="~/images/social-guy.svg" />
     </div>
- @foreach(var item in Model){
-       
-        <partial name="_Link" model="item" view-data="ViewData" />
- }
+
+    <div class="column" style="width:780px;">
+        <div class="LinkContainer">
+            @foreach (var item in Model) {
+                <div style="margin-left:3px;margin-top:5px">
+                    <partial name="_LinkPartial" model="item" view-data="ViewData" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="column img-container-right" style="float:right;width:250px;height:700px;">
+        <img style="width:250px;height:700px;" src="~/images/social-girl.svg" />
+    </div>
+
 </div>

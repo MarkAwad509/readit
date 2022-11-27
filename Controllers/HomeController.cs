@@ -15,23 +15,20 @@ namespace Readit.Controllers {
         }
 
         public ActionResult Index() {
-            var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
-
-            if (user.Email != "") {
-                ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
-                var votes = new List<Vote>();
-                _session.SetString("votes", JsonConvert.SerializeObject(votes));
+            var member = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            if (member.Email != null) {
+                ViewBag.connectedUser = member.Id;
                 return View("Index", _context.Links.ToList());
             }
             else
                 return RedirectToAction("Index", "Login");
-
         }
 
         public IActionResult ViewLink(int Id) {
             ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
             return View(_context.Links.Where(l => l.Id == Id).First());
         }
+
         public IActionResult Create() {
             return View();
         }
