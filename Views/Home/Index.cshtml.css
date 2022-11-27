@@ -14,3 +14,15 @@
     width: 100px;
     margin-bottom: 10px;
 }
+
+.img-container-left {
+    float: left;
+    width: 250px;
+    height: 700px;
+}
+
+.img-container-right {
+    float: right;
+    width: 250px;
+    height: 700px;
+}
