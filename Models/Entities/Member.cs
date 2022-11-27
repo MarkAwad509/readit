@@ -1,28 +1,29 @@
-﻿namespace Readit.Models.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Readit.Models.Entities
 {
-    public class Member
+    public partial class Member
     {
-        public int ID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string? Username { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public virtual ICollection<Link> Links { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
 
-        public Member() { }
-
-        public Member(string username, string email, string password)
+        public Member()
         {
-            this.ID = 0;
-            this.Username = username;
-            this.Email = email;
-            this.Password = password;
+            Links = new HashSet<Link>();
+            Votes = new HashSet<Vote>();
         }
-
-        public Member(int id, string username, string email, string password)
+        public Member(string Username, string Email, string Password)
         {
-            this.ID = id;
-            this.Username = username;
-            this.Email = email;
-            this.Password = password;
+            this.Username = Username;
+            this.Email = Email;
+            this.Password = Password;
         }
     }
 }

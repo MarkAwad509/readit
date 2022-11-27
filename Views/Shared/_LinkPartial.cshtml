@@ -1,0 +1,29 @@
+﻿@using Readit.Models.Entities;
+@model Link
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<div class="Link">
+    <a style="text-decoration:none;color:black;" asp-action="ViewLink" asp-controller="Home" asp-route-id="@Model.Id"><h1  style="display:inline;">@Model.Title  </h1></a><p style="display:inline; "> @Model.PublicationDate     Published by: @Model.Member.Username</p>
+    
+    @if ((int)ViewData["user"] == Model.MemberId)
+    {
+        <a style="text-decoration:none; color:black;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
+            <i class="bi bi-x-circle-fill" style="display:inline;float:right"></i>
+        </a>
+    }
+
+ 
+    <p style="word-break:break-all;">@Model.Description</p>
+    
+   <p style="float:right;"> @Model.Comments.Count()
+
+        <i class="bi bi-chat"></i>
+   </p>
+
+    
+
+</div>

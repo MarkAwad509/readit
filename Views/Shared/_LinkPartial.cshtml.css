@@ -1,0 +1,15 @@
+﻿.Link {
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 5px;
+    width: 750px;
+    height: auto;
+    overflow: hidden;
+}
+
+.Title {
+    width: 10ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

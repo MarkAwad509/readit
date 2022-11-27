@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-action="AjouterUnLien">
+    <label for="Title" >Title</label>
+    <br/>
+    <input type="text" name="Title" id="Title" maxlength="20" /><p class="text-muted" style="opacity:0.80;color:dimgrey;display:inline;">*maximum 20</p>
+    <br/>
+    <label for="Description" > Description </label>
+    <br />
+    <input type="text" name="Description" id="Description"/>
+    <br/>
+    <button type="submit" class="btn btn-success" style="color: orange;" value="Submit">Submit</button>
+</form>

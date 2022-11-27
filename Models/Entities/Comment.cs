@@ -1,24 +1,19 @@
-﻿using MySql.Data.Types;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Readit.Models.Entities
 {
-    public class Comment
+    public partial class Comment
     {
-        public int ID { get; set; }
-        public Member User { get; set; }
-        public Link Link { get; set; }
-        public string Content { get; set; }
-        public DateTime Publication { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public int? MemberId { get; set; }
+        public int? LinkId { get; set; }
+        public string? Content { get; set; }
+        public DateTime? PublicationDate { get; set; }
 
-        public Comment() { }
-
-        public Comment(int iD, Member user, Link link, string content, DateTime publication)
-        {
-            this.ID = iD;
-            this.User = user;
-            this.Link = link;
-            this.Content = content;
-            this.Publication = publication;
-        }
+        public virtual Link? Link { get; set; }
+        public virtual Member? Member { get; set; }
     }
 }

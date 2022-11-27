@@ -1,24 +1,30 @@
 ﻿using MySql.Data.MySqlClient;
 using Readit.Models.Entities;
-
+using Readit.Models.DAL;
 namespace Readit.Models.DAO
 {
     public class LinkDAO
     {
         private readonly IConfiguration configuration;
-        public DbContext dbContext { get; set; }
+        public mproulx_5w6_readitContext dbContext { get; set; }
         private MemberDAO mDAO;
-
+        private string connectionString;
 
         public LinkDAO(IConfiguration _configuration)
         {
             this.configuration = _configuration;
-            this.dbContext = new DbContext(this.configuration);
+            this.dbContext = new mproulx_5w6_readitContext();
             this.mDAO = new MemberDAO(this.configuration);
+            connectionString = configuration.GetConnectionString("Db");
         }
-
-        public bool AddLink(Link link){
-            bool result = false;
+        public List<Link> getLinks()
+        {
+            return dbContext.Links.ToList();
+        }
+        public void AddLink(Link link){
+            dbContext.Add<Link>(link);
+            dbContext.SaveChanges();
+            /*bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try{
                 connection.Open();
@@ -39,11 +45,12 @@ namespace Readit.Models.DAO
             } finally {
                 connection.Close();
             }
-            return result;
+            return result;*/
         }
 
         public Link GetLinkByID(int linkId) {
-            Link? link = null;
+            return dbContext.Links.Where(l => l.Id == linkId).First();
+            /*Link? link = null;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -64,38 +71,14 @@ namespace Readit.Models.DAO
             } finally {
                 connection.Close();
             }
-            return link;
+            return link;*/
         }
 
-        public IList<Link> GetLinksSortedByScore() {
-            IList<Link> links = new List<Link>();
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT * FROM Link ORDER BY SUM(UpVote - DownVote) DESC", connection);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read()) {
-                    links.Add(new Link(
-                        dataReader.GetInt32("ID"),
-                        mDAO.GetMemberByID(dataReader.GetInt32("Member_ID")),
-                        dataReader.GetString("Title"),
-                        dataReader.GetString("Description"),
-                        dataReader.GetInt32("UpVote_Amount"),
-                        dataReader.GetInt32("DownVote_Amount"),
-                        dataReader.GetDateTime("Publication_Date")
-                    ));
-                }
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-
-            return links;
-        }
+       
 
         public IList<Link> GetLinksByMember(int memberId) {
-            IList<Link> links = new List<Link>();
+            return dbContext.Links.Where(l => l.MemberId == memberId).ToList();
+           /* IList<Link> links = new List<Link>();
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -120,49 +103,23 @@ namespace Readit.Models.DAO
                 connection.Close();
             }
 
-            return links;
+            return links;*/
         }
 
-        public void GetPositiveVotesByLinkID(Link link) {
-            int value;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(ID) FROM Vote WHERE isUpVote=1 AND Link_ID=@id;", connection);
-                command.Parameters.Add(new MySqlParameter("@ID", link.ID));
-                value = Convert.ToInt32(command.ExecuteScalar());
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            link.UpVote = value;
-        }
-
-        public void GetNegativeVotesByLinkID(Link link) {
-            int value;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(ID) FROM Vote WHERE isUpVote=0 AND Link_ID=@id;", connection);
-                command.Parameters.Add(new MySqlParameter("@ID", link.ID));
-                value = Convert.ToInt32(command.ExecuteScalar());
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            link.DownVote = value;
+        public List<Vote> GetMemberVotes(int memberId)
+        {
+            return dbContext.Votes.Where(v => v.MemberId.Equals(memberId)).ToList();
         }
 
         public bool MemberHasVoted(Link link, Member member) {
+            
             bool voted = true;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            MySqlConnection connection = new MySqlConnection(connectionString);
             try {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("SELECT IsUpVote FROM Vote WHERE Member_ID=@member_id AND Link_ID=@link_id", connection);
-                command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.GetByte("IsUpvote") != 1 | reader.GetByte("IsUpvote") != 0)
                     voted = false;
@@ -176,12 +133,12 @@ namespace Readit.Models.DAO
 
         public bool UpdateLink(Link link) {
             bool result = false;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            MySqlConnection connection = new MySqlConnection(connectionString);
             try {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("UPDATE Link SET Member_ID=@memberId,Title=@title,Description=@description,UpVote_Amount=@upvote,DownVote_Amount=@downvote,Publication_Date=@publicationDate  WHERE ID=@id", connection);
-                command.Parameters.Add(new MySqlParameter("@id", link.ID));
-                command.Parameters.Add(new MySqlParameter("@memberId", link.Publisher.ID));
+                command.Parameters.Add(new MySqlParameter("@id", link.Id));
+                command.Parameters.Add(new MySqlParameter("@memberId", link.MemberId));
                 command.Parameters.Add(new MySqlParameter("@title", link.Title));
                 command.Parameters.Add(new MySqlParameter("@description", link.Description));
                 command.Parameters.Add(new MySqlParameter("@upvote", link.UpVote));
@@ -199,8 +156,26 @@ namespace Readit.Models.DAO
             return result;
         }
 
-        public bool DeleteLink(Link link) {
-            bool result = false;
+        public void DeleteLink(Link link) {
+            dbContext.Links.Remove(link);
+            
+            foreach (var item in dbContext.Comments)
+            {
+                if (item.LinkId == link.Id)
+                {
+                    dbContext.Comments.Remove(item);
+                }
+            }
+            foreach(var item in dbContext.Votes)
+            {
+                if (item.Id == link.Id)
+                {
+                    dbContext.Votes.Remove(item);
+                }
+            }
+            dbContext.SaveChanges();
+            
+           /* bool result = false;
             MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
             try {
                 connection.Open();
@@ -216,18 +191,21 @@ namespace Readit.Models.DAO
                 connection.Close();
             }
 
-            return result;
+            return result;*/
         }
 
         public bool AddVote(Link link, Member member, bool isPositive) {
-            bool result = false;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+
+            
+
+             bool result = false;
+            MySqlConnection connection = new MySqlConnection(connectionString);
             try {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("INSERT INTO Vote(Member_ID, Link_ID, IsUpVote)" +
                 "\r\nVALUES (@member_id, @link_id, @ispositive)");
-                command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                 if (isPositive == true)
                     command.Parameters.Add(new MySqlParameter("@isUpVote", 1));
                 else
@@ -246,25 +224,25 @@ namespace Readit.Models.DAO
 
         public bool updateVote(Member member, Link link) {
             bool found = false;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlCommand updateCommand;
             try {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("Select IsUpVote FROM Vote WHERE Member_ID = @member_id AND Link_ID = @link_id", connection);
-                command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                 MySqlDataReader reader = command.ExecuteReader();
                 int value = reader.GetInt32("IsUpVote");
                 if (value == 0) {
                     updateCommand = new MySqlCommand("UPDATE Vote SET IsUpVote = 1 WHERE Member_ID = @member_id AND Link_ID = @link_id", connection);
-                    command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                    command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                    command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                    command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                     found = true;
                 }
                 else {
                     updateCommand = new MySqlCommand("UPDATE Vote SET IsUpVote = 0 WHERE Member_ID = @member_id AND Link_ID = @link_id", connection);
-                    command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                    command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                    command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                    command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                     found = true;
                 }
             } catch (Exception) {
@@ -277,12 +255,12 @@ namespace Readit.Models.DAO
 
         public bool DeleteVote(Member member, Link link) {
             bool result = false;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
+            MySqlConnection connection = new MySqlConnection(connectionString);
             try {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand("DELETE FROM Vote WHERE Member_ID=@member_id AND Link_ID=@link_id", connection);
-                command.Parameters.Add(new MySqlParameter("@member_id", member.ID));
-                command.Parameters.Add(new MySqlParameter("@link_id", link.ID));
+                command.Parameters.Add(new MySqlParameter("@member_id", member.Id));
+                command.Parameters.Add(new MySqlParameter("@link_id", link.Id));
                 int rows = command.ExecuteNonQuery();
                 if (rows > 0)
                     result = true;

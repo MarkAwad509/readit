@@ -2,12 +2,16 @@
 using Readit.Models.DAO;
 using Readit.Models.Entities;
 using System.Diagnostics.Metrics;
-
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 namespace Readit.Controllers {
+    
     public class LoginController : Controller {
         MemberDAO memberDAO;
-        public LoginController(IConfiguration configuration) {
+        private readonly ISession _session;
+        public LoginController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor) {
             memberDAO = new MemberDAO(configuration);
+            _session = httpContextAccessor.HttpContext.Session;
         }
 
         public IActionResult Index() {
@@ -23,8 +27,12 @@ namespace Readit.Controllers {
             }
             else
             {
-                ViewBag.connectedUser=currentUser;
-                return RedirectToAction("Index", "Home", new { Member = currentUser.Username });
+           
+                _session.SetString("user", JsonConvert.SerializeObject(currentUser, Formatting.None, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling= ReferenceLoopHandling.Ignore
+                }));
+                return RedirectToAction("Index", "Home");
 
             }
 
