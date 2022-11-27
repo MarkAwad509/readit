@@ -51,3 +51,7 @@ button.accept-policy {
 .nav-item {
     font-size: 24px;
 }
+
+.logout-btn {
+    text-align: right;
+}
