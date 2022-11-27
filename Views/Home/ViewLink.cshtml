@@ -34,14 +34,6 @@
             <h1 class="card-title">&nbsp;&nbsp;@Model.Title</h1>
             <h6>@Model.Description</h6>
             <div class="float-start fw-bolder">
-                <a style="cursor:pointer">
-                    <img src="~/images/thumb-up-outline.png" width="50%" height="50%" /> @Model.UpVote
-                </a>
-                <br />
-                <br />
-                <a style="cursor:pointer">
-                    <img src="~/images/thumb-down-outline.png" width="50%" height="50%" /> @Model.DownVote
-                </a>
                 @if (is_upvote == false)
                 {
                     <a asp-action="Upvote" style="cursor:pointer">

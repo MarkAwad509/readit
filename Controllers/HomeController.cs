@@ -1,16 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Readit.Models.DAO;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Readit.Models.Entities;
-using Readit.Models.DAL;
-using MySqlX.XDevAPI;
-using Castle.Core.Resource;
 
-namespace Readit.Controllers
-{
+namespace Readit.Controllers {
     public class HomeController : Controller
     {
         MemberDAO memberDAO;
