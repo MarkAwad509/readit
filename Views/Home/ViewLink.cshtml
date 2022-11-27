@@ -8,7 +8,7 @@
 }
 
 <div class="d-flex justify-content-center">
-    <div class="d-flex justify-content-center rounded card text-white" style="width:100vw;height:20rem">
+    <div class="rounded card text-white" style="width:100vw;height:20rem">
         <div class="card-body bg-secondary">
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h6 class="card-subtitle">@Model.Member.Username</h6>
@@ -16,19 +16,15 @@
             <h6>@Model.Description</h6>
             <div class="float-start fw-bolder">
                 <a style="cursor:pointer">
-               
                     <img src="~/images/thumb-up-outline.png" width="50%" height="50%" /> @Model.UpVote
-                
-            </a>
-            <br />
-            <br />
-            <a style="cursor:pointer">
-                
+                </a>
+                <br />
+                <br />
+                <a style="cursor:pointer">
                     <img src="~/images/thumb-down-outline.png" width="50%" height="50%" /> @Model.DownVote
-                
-            </a>
+                </a>
             </div>
-            
+
         </div>
     </div>
 </div>
