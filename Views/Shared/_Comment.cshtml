@@ -1,0 +1,23 @@
+﻿@using Readit.Models.Entities
+@model Comment
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="d-flex justify-content-center">
+    <div class="text-white" style="width:80rem">
+        <div class="carte card-body bg-secondary">
+            <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
+            <h4 class="card-subtitle">&nbsp;&nbsp;&nbsp;&nbsp; @Model.Member.Username</h4>
+            <p class="card-title">@Model.Content</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .carte{
+        border: 2px solid;
+        border-radius: 8px;
+        margin-bottom: 5px;
+    }
+</style>
