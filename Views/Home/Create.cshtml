@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="d-flex justify-content-center bg-secondary" style="height:40vh">
+    <br />
+    <form asp-action="AjouterUnLien">
+        <br />
+        <input type="text" name="Title" id="Title" placeholder="Titre" style="width:100%"/>
+        <br />
+        <br />
+        <textarea cols="100" rows="6" type="text" name="Description" placeholder="Description"></textarea>
+        <br/>
+        <input class="btn btn-primary" type="submit" style="vertical-align:central" value="Publier"/>
+    </form>
+</div>
+<img src="~/images/undraw_Engineering_team.png" />
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

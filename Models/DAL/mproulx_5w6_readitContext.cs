@@ -66,11 +66,6 @@ namespace Readit.Models.DAL
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.LinkId)
                     .HasConstraintName("Comment_ibfk_2");
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.MemberId)
-                    .HasConstraintName("Comment_ibfk_1");
             });
 
             modelBuilder.Entity<Link>(entity =>
