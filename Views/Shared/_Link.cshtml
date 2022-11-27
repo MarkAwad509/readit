@@ -1,18 +1,6 @@
 ﻿@using Readit.Models.Entities
 @model Link
 
-@*@{
-    List<Customer> favourites = JsonConvert.DeserializeObject<List<Customer>>(Http.HttpContext.Session.GetString("favoris"));
-    bool is_favourite = false;
-    foreach (var item in favourites)
-    {
-        if (item.Id == Model.Id)
-        {
-            is_favourite = true;
-            break;
-        }
-    }
-}*@
 <a asp-action="ViewLink" asp-route-id="@Model.Id" style="text-decoration:none">
     <div class="d-flex justify-content-center">
         <div class="rounded card text-white" style="width:50rem;cursor:pointer">

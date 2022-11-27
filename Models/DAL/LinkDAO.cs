@@ -106,37 +106,9 @@ namespace Readit.Models.DAO
             return links;*/
         }
 
-        public void GetPositiveVotesByLinkID(Link link) {
-            
-           /* int value;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(ID) FROM Vote WHERE isUpVote=1 AND Link_ID=@id;", connection);
-                command.Parameters.Add(new MySqlParameter("@ID", link.ID));
-                value = Convert.ToInt32(command.ExecuteScalar());
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            link.UpVote = value;*/
-        }
-
-        public void GetNegativeVotesByLinkID(Link link) {
-           /* int value;
-            MySqlConnection connection = new MySqlConnection(dbContext.connectionString);
-            try {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("SELECT COUNT(ID) FROM Vote WHERE isUpVote=0 AND Link_ID=@id;", connection);
-                command.Parameters.Add(new MySqlParameter("@ID", link.ID));
-                value = Convert.ToInt32(command.ExecuteScalar());
-            } catch (Exception) {
-                throw;
-            } finally {
-                connection.Close();
-            }
-            link.DownVote = value;*/
+        public List<Vote> GetMemberVotes(int memberId)
+        {
+            return dbContext.Votes.Where(v => v.MemberId.Equals(memberId)).ToList();
         }
 
         public bool MemberHasVoted(Link link, Member member) {

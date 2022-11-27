@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Readit.Models.Entities;
 using Readit.Models.DAL;
+using MySqlX.XDevAPI;
+using Castle.Core.Resource;
 
 namespace Readit.Controllers
 {
@@ -31,6 +33,8 @@ namespace Readit.Controllers
             if (JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Email!="")
             {
                 ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
+                List<Vote> votes = new List<Vote>();
+                _session.SetString("votes", JsonConvert.SerializeObject(votes));
                 return View("Index",linkDAO.getLinks());
             }
             else {
@@ -75,17 +79,20 @@ namespace Readit.Controllers
 
         public IActionResult PublierCommentaire(int linkid, int memberid, string comment)
         {
-            var verification = comment.Split(" ");
-            if (comment != "" | verification.Count() == 0)
+            if (comment != null )
             {
-                Comment commentaire = new Comment()
+                var verification = comment.Split(' ');
+                if (verification.Count() == 0) 
                 {
-                    LinkId = linkid,
-                    MemberId = memberid,
-                    Content = comment,
-                    PublicationDate = DateTime.Now
-                };
-                commentDAO.AddComment(commentaire);
+                    Comment commentaire = new Comment()
+                    {
+                        LinkId = linkid,
+                        MemberId = memberid,
+                        Content = comment,
+                        PublicationDate = DateTime.Now
+                    };
+                    commentDAO.AddComment(commentaire);
+                }
             }
             else
             {
