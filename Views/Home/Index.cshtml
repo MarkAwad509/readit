@@ -3,12 +3,27 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
+    ViewData["Title"] = "Home Page";
 }
+<div class="bg-light" style="height:100%">
+    <br />
+    <div class="row d-flex justify-content-center">
+        <div class="rounded-1 card bg-secondary" style="width:90vw;cursor:pointer">
+            <div class="card-body text-white">
+                &nbsp;&nbsp;<h4 class="float-start">Publier</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a asp-action="Create" style="vertical-align:middle">
+                    <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
 
 <div class="row">
 
     <div class="column img-container-left">
-        <img style="width:250px;height:700px;" src="~/images/undraw_social_boy.png" />
+        <img style="width:250px;height:700px;" src="~/images/social-boy.png" />
     </div>
 
     <div class="column" style="width:780px;">
@@ -22,7 +37,7 @@
     </div>
 
     <div class="column img-container-right">
-        <img style="width:250px;height:700px;" src="~/images/undraw_Social_girl.png" />
+        <img style="width:250px;height:700px;" src="~/images/social-girl.png" />
     </div>
 
 </div>

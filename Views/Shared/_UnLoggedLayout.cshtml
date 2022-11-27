@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/readit.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passion+One" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passion+One&display=swap">
 
 </head>
 <body>
@@ -34,15 +35,15 @@
         </main>
     </div>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
     <footer class="border-top footer text-muted font-exception">
         <div class="container">
             &copy; 2022 - Readit - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
-<link href="https://fonts.googleapis.com/css?family=Passion+One&display=swap" rel="stylesheet">
 </html>

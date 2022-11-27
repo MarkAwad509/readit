@@ -24,6 +24,13 @@ namespace Readit.Controllers {
                 return RedirectToAction("Index", "Login");
         }
 
+        public IActionResult Delete(int Id) {
+            var l = _context.Links.Find(Id);
+            _context.Links.Remove(l);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         public IActionResult ViewLink(int Id) {
             ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
             return View(_context.Links.Where(l => l.Id == Id).First());

@@ -45,6 +45,8 @@ button.accept-policy {
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
+    height:50px;
+    max-height: 50px;
 }
 
 .nav-item {
@@ -53,4 +55,9 @@ button.accept-policy {
 
 .logout-btn {
     text-align: right;
+}
+
+footer {
+    height: 50px;
+    max-height: 50px;
 }
