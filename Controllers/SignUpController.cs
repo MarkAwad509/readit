@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Readit.Models.DAO;
 using Readit.Models.Entities;
-using Microsoft.AspNetCore.Http;
-namespace Readit.Controllers {
+using Newtonsoft.Json;
+using MySqlConnector;
+using Readit.Models;
+
+namespace Readit.Controllers
+{
     public class SignUpController : Controller {
-        MemberDAO mDAO;
         private readonly ISession _session;
-        public SignUpController(IConfiguration configuration,IHttpContextAccessor httpContextAccessor) {
-            this.mDAO = new MemberDAO(configuration);
+        private readonly mproulx_5w6_readitContext _context;
+        public SignUpController(IHttpContextAccessor httpContextAccessor) {
+            _context = new mproulx_5w6_readitContext();
             _session = httpContextAccessor.HttpContext.Session;
         }
 
@@ -15,11 +18,17 @@ namespace Readit.Controllers {
             return View();
         }
         [HttpPost]
-        public IActionResult CreateMember(string Username, string Email, string Password) {
-            var member = new Member(Username, Email, Password);
+        public IActionResult CreateMember(Member member) {
+            try {
+                _context.Members.Add(member);
+                _context.SaveChanges();
+            } catch (MySqlException ex) {
+                ViewBag.Alert = $"Exception: {ex.InnerException}, Message: {ex.Message}";
+                return View("Index");
+            }
 
-            return mDAO.AddMember(member) ? RedirectToAction("Index","Home",new {Member = member.Username}) : View();
-
+            _session.SetString("user", JsonConvert.SerializeObject(member));
+            return RedirectToAction("Index", "Home");
         }
     }
 }

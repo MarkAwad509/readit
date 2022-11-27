@@ -17,11 +17,5 @@ namespace Readit.Models.Entities
         public virtual Member? Member { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Vote> Votes { get; set; }
-
-        public Link()
-        {
-            Comments = new HashSet<Comment>();
-            Votes = new HashSet<Vote>();
-        }
     }
 }

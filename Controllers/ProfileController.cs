@@ -6,7 +6,7 @@ namespace Readit.Controllers {
     public class ProfileController : Controller {
         private readonly ISession _session;
 
-        public ProfileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor) {
+        public ProfileController(IHttpContextAccessor httpContextAccessor) {
             _session = httpContextAccessor.HttpContext.Session;
         }
         public IActionResult Index() {
@@ -31,6 +31,11 @@ namespace Readit.Controllers {
         public IActionResult EditProfile() {
             ViewBag.CurrentMember = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             return View("ProfileEdit");
+        }
+
+        public IActionResult ViewMyLinks() {
+            var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            return View(user.Links);
         }
     }
 }

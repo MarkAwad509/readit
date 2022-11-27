@@ -19,6 +19,13 @@
                 asp-action="CreateMember"
                 method="post">
                 <br />
+                @if (ViewBag.Alert != null) {
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            alert("@ViewBag.Alert");
+                        };
+                    </script>
+                }
                 <div class="form-group username-group ">
                     <label for="Username" class="input-label">Username</label>
                     <input asp-for="Username" type="text" class="form-control input-full" placeholder="Username" required b-1hx6fbnuan>

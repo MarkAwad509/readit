@@ -5,14 +5,6 @@
     <div class="d-flex justify-content-center">
         <div class="rounded card text-white" style="width:50rem;cursor:pointer">
             <div class="card-body btn-secondary">
-                @*@if (is_favourite)
-                {
-                <a asp-action="AddToFavourite" asp-route-id="@Model.Id" asp-route-operation="remove"> <img src="~/img/bookmark-check.png" style="float:right" /> </a>
-                }
-                else
-                {
-                <a asp-action="AddToFavourite" asp-route-id="@Model.Id" asp-route-operation="add"> <img src="~/img/bookmark-check-outline.png" style="float:right" /> </a>
-                }*@
                 <h5 class="card-subtitle">@Model.Member.Username</h5>
                 <div class="float-end fw-bolder">
                     <img src="~/images/thumb-down-outline.png" width="50%" height="50%" /> @Model.DownVote

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Readit.Models.Entities;
 
-namespace Readit.Models.DAL
+namespace Readit.Models
 {
     public partial class mproulx_5w6_readitContext : DbContext
     {
