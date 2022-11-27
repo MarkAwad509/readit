@@ -13,12 +13,14 @@ namespace Readit.Models.Entities
         public string? Password { get; set; }
         public virtual ICollection<Link> Links { get; set; }
         public virtual ICollection<Vote> Votes { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
-        public Member()
-        {
+        public Member() {
             Links = new HashSet<Link>();
             Votes = new HashSet<Vote>();
+            Comments = new HashSet<Comment>();
         }
+
         public Member(string Username, string Email, string Password)
         {
             this.Username = Username;
