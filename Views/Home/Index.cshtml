@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
+    ViewData["Title"] = "Home Page";
 }
-<h1>Links</h1>
 <div>
     <div class="bg-light" style="height:100%">
         <br />
@@ -24,5 +24,4 @@
        
         <partial name="_Link" model="item" view-data="ViewData" />
  }
-
 </div>
