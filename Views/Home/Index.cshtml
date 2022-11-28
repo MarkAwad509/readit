@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
+    ViewData["Title"] = "Home Page";
 }
-<h1>Links</h1>
 <div>
     <div class="row d-flex justify-content-center">
         <div class="card bg-secondary" style="width:50rem;cursor:pointer">
@@ -19,7 +19,6 @@
     <br />
     @foreach (var item in Model)
     {
-
         <partial name="_Link" model="item" view-data="ViewData" />
     }
 </div>
