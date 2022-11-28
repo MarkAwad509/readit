@@ -6,23 +6,20 @@
 }
 <h1>Links</h1>
 <div>
-    <div class="bg-light" style="height:100%">
-        <br />
-        <div class="row d-flex justify-content-center">
-            <div class="rounded-1 card bg-secondary" style="width:90vw;cursor:pointer">
-                <div class="card-body text-white">
-                    &nbsp;&nbsp;<h4 class="float-start">Publier</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a asp-action="Create" style="vertical-align:middle">
-                        <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
-                    </a>
-                </div>
+    <div class="row d-flex justify-content-center">
+        <div class="card bg-secondary" style="width:50rem;cursor:pointer">
+            <div class="card-body text-white">
+                &nbsp;&nbsp;<h4 class="float-start">Publier</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a asp-action="Create" style="vertical-align:middle">
+                    <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
+                </a>
             </div>
         </div>
-        <br />
     </div>
- @foreach(var item in Model){
-       
-        <partial name="_Link" model="item" view-data="ViewData" />
- }
+    <br />
+    @foreach (var item in Model)
+    {
 
+        <partial name="_Link" model="item" view-data="ViewData" />
+    }
 </div>
