@@ -14,11 +14,10 @@ namespace Readit.Controllers {
         }
 
         public IActionResult ProfileView() {
-            var t = _session.GetString("user");
-            var user = JsonConvert.DeserializeObject<Member>(t);
+            var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             ViewBag.CommentCount = user.Comments.Count;
             ViewBag.PostCount = user.Links.Count;
-            ViewBag.LikesCount = countScore(user);
+            ViewBag.user=user;
             return View("ProfileView", user);
         }
 

@@ -17,7 +17,7 @@ namespace Readit.Controllers {
         public ActionResult Index() {
             var member = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             if (member.Email != null) {
-                ViewBag.connectedUser = member.Id;
+                ViewBag.connectedUser = member;
                 return View("Index", _context.Links.ToList());
             }
             else

@@ -1,5 +1,5 @@
 ﻿@using Readit.Models.Entities;
-@model Link
+@model Readit.Models.Entities.Link;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -11,10 +11,10 @@
         <h1>@Model.Title</h1>
         @{
             bool upVotedorDownVoted = false;
-            int personId = (int)ViewData["user"];
+            var member = (Member)ViewData["user"];
             Vote vote = null;
             foreach (var item in Model.Votes) {
-                if (item.MemberId == personId) {
+                if (item.MemberId == member.Id) {
                     if (item.IsUpVote is true) {
                         upVotedorDownVoted = true;
                         vote = item;
@@ -27,12 +27,12 @@
             }
         }
 
-        @if ((int)ViewData["user"] == Model.MemberId) {
+        @if (member.Id == Model.MemberId) {
             <a style="text-decoration:none; color:black;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
                 <i class="bi bi-x-circle-fill" style="display:inline;float:right"></i>
             </a>
         }
-        <h6>Published by: @Model.Member.Username</h6>
+        <h6>Published by: @member.Username</h6>
         <h6 class="text-muted"> @Model.PublicationDate</h6>
         &nbsp;
 
@@ -45,10 +45,10 @@
             }
             else {
                 if (upVotedorDownVoted == true && vote != null) {
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@personId" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
                 }
                 else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@personId" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
                 }
 
             }
@@ -63,10 +63,10 @@
             }
             else {
                 if (upVotedorDownVoted == false) {
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@personId" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
                 }
                 else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@personId" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
                 }
 
             }
