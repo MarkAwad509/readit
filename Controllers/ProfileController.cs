@@ -14,7 +14,8 @@ namespace Readit.Controllers {
         }
 
         public IActionResult ProfileView() {
-            var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            var t = _session.GetString("user");
+            var user = JsonConvert.DeserializeObject<Member>(t);
             ViewBag.CommentCount = user.Comments.Count;
             ViewBag.PostCount = user.Links.Count;
             ViewBag.LikesCount = countScore(user);
@@ -31,11 +32,6 @@ namespace Readit.Controllers {
         public IActionResult EditProfile() {
             ViewBag.CurrentMember = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             return View("ProfileEdit");
-        }
-
-        public IActionResult ViewMyLinks() {
-            var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
-            return View(user.Links);
         }
     }
 }

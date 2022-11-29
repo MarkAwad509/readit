@@ -3,12 +3,11 @@
 @using Newtonsoft.Json;
 @inject IHttpContextAccessor Http;
 @model Link
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
-    ViewData["user"] = ViewBag.connectedUser;
-    List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(Http.HttpContext.Session.GetString("votes"));
+    //ViewData["user"] = ViewBag.connectedUser;
+    //var t = Http.HttpContext.Session.GetString("votes");
+    List<Vote> votes = ViewBag.connectedUser.Votes;
+    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(t);
     bool is_upvote = false;
     bool is_downvote = false;
     if (votes != null)
@@ -77,7 +76,7 @@
     }
     <div class="rounded-1 card bg-secondary" style="width:80vw">
         <div class="card-body text-white">
-            <input name="memberid" id="memberid" value="@ViewData["user"]" hidden />
+            <input name="memberid" id="memberid" value="@ViewBag.connectedUser" hidden />
             <input name="linkid" id="linkid" value="@Model.Id" hidden />
             <input type="text" name="comment" id="comment" style="vertical-align:middle;width:92%" placeholder="Écrire un commentaire" />
             &nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary" type="submit" value="Publier" />

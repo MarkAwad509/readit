@@ -1,4 +1,5 @@
-﻿@model Readit.Models.Entities.Member
+﻿@using Readit.Models.Entities
+@model Readit.Models.Entities.Member
 @{
     ViewData["CommentCount"] = ViewBag.CommentCount;
     ViewData["PostCount"] = ViewBag.PostCount;
@@ -8,13 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm" style="max-width:500px">
-            <h2>jjj</h2>
-            <h2>jjj</h2>
-            <h2>jjj</h2>
-            <h2>jjj</h2>
-            <h2>jjj</h2>
-            <h2>jjj</h2>
-            <h2>jjj</h2>
+            @foreach (var link in Model.Links.ToList()){
+                <partial name="_LinkPartial" model="link" view-data="ViewData" />
+            }
         </div>
 
         <div class="col-sm">
