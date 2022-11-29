@@ -2,7 +2,7 @@
     ViewData["Title"] = "Create Link";
 }
 
-<div class="d-flex justify-content-center bg-secondary" style="height:40vh">
+<div class="contour d-flex justify-content-center bg-secondary">
     <br />
     <form asp-action="AjouterUnLien">
         <br />
@@ -10,12 +10,31 @@
         <br />
         <br />
         <textarea cols="100" rows="6" type="text" name="Description" placeholder="Description"></textarea>
-        <br/>
-        <input class="btn btn-primary" type="submit" style="vertical-align:central" value="Publier"/>
+        <div class="submit-button">
+            <input class="btn btn-primary" type="submit" value="Publier" />
+        </div>
     </form>
 </div>
-<img src="~/images/undraw_Engineering_team.png" />
-
+<img class="image-de-groupe" src="~/images/undraw_Engineering_team.png" />
+<style>
+    .contour{
+        border: 2px solid;
+        border-radius: 8px;
+        width: 80vw;
+        height: 40vh;
+    }
+    .submit-button{
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .image-de-groupe{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        max-width:100%;
+        position:relative;
+    }
+</style>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
