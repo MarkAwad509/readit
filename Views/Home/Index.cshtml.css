@@ -2,7 +2,6 @@
     border: 2px solid;
     border-radius: 8px;
     background-color: grey;
-    width: fit-content;
     padding: 10px;
     margin:0px;
     margin-right:0px;
@@ -30,4 +29,18 @@
     float: right;
     width: 250px;
     height: fit-content ;
+}
+
+.create-card {
+    width: 51vw;
+    background-color: grey;
+    border: 2px solid;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    margin-right: 1rem;
+}
+
+.publier-text {
+    margin-left: 1vw;
+    margin-right: 2vw;
 }

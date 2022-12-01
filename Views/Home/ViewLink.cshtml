@@ -31,7 +31,6 @@
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h6 class="card-subtitle">@Model.Member.Username</h6>
             <h1 class="card-title">&nbsp;&nbsp;@Model.Title</h1>
-            <h6>@Model.Description</h6>
             <div class="float-start fw-bolder">
                 @if (is_upvote == false)
                 {
@@ -57,10 +56,11 @@
                         <img src="~/images/thumb-down.png" width="50%" height="50%" /> @Model.DownVote
                     </a>
                 }
+
                 <br />
                 <br />
             </div>
-
+            <h6>@Model.Description</h6>
         </div>
     </div>
 </div>

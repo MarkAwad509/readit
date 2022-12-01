@@ -34,6 +34,8 @@ namespace Readit.Controllers {
         public IActionResult ViewLink(int Id) {
             ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             return View(_context.Links.Where(l => l.Id == Id).FirstOrDefault());
+            ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
+            return View(_context.Links.Find(Id));
         }
 
         public IActionResult Create() {

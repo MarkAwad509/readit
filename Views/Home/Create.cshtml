@@ -2,19 +2,19 @@
     ViewData["Title"] = "Create Link";
 }
 
-<div class="d-flex justify-content-center bg-secondary" style="height:40vh">
+<div class="d-flex justify-content-center form-grid">
     <br />
     <form asp-action="AjouterUnLien">
         <br />
-        <input type="text" name="Title" id="Title" placeholder="Titre" style="width:100%"/>
+        <input class="title-input" type="text" name="Title" id="Title" placeholder="Titre"/>
         <br />
         <br />
         <textarea cols="100" rows="6" type="text" name="Description" placeholder="Description"></textarea>
         <br/>
-        <input class="btn btn-primary" type="submit" style="vertical-align:central" value="Publier"/>
+        <input class="btn btn-primary submit-button" type="submit" value="Publier" />
     </form>
 </div>
-<img src="~/images/undraw_Engineering_team.png" />
+<img class="img-engineers" src="~/images/undraw_Engineering_team.png" />
 
 @section Scripts {
     @{
