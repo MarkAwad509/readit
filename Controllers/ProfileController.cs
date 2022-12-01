@@ -17,8 +17,9 @@ namespace Readit.Controllers {
             var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             ViewBag.CommentCount = user.Comments.Count;
             ViewBag.PostCount = user.Links.Count;
-            ViewBag.user=user;
-            return View("ProfileView", user);
+            ViewBag.LikesCount = countScore(user);
+            ViewBag.user = user;
+            return View("ProfileView");
         }
 
         private int countScore(Member member) {

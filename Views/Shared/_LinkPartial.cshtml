@@ -31,8 +31,10 @@
             <a style="text-decoration:none; color:black;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
                 <i class="bi bi-x-circle-fill" style="display:inline;float:right"></i>
             </a>
+            <h6>Published by: @member.Username</h6>
+        } else {
+            <h6>Published by: @Model.Member.Username</h6>
         }
-        <h6>Published by: @member.Username</h6>
         <h6 class="text-muted"> @Model.PublicationDate</h6>
         &nbsp;
 
@@ -45,10 +47,10 @@
             }
             else {
                 if (upVotedorDownVoted == true && vote != null) {
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@Model.MemberId" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
                 }
                 else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@Model.MemberId" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
                 }
 
             }
@@ -63,10 +65,10 @@
             }
             else {
                 if (upVotedorDownVoted == false) {
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@Model.MemberId" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
                 }
                 else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@Model.MemberId" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
                 }
 
             }

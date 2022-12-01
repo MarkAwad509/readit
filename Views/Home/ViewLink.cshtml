@@ -3,17 +3,17 @@
 @using Newtonsoft.Json;
 @inject IHttpContextAccessor Http;
 @model Link
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-    //ViewData["user"] = ViewBag.connectedUser;
-    //var t = Http.HttpContext.Session.GetString("votes");
-    List<Vote> votes = ViewBag.connectedUser.Votes;
-    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(t);
+    ViewData["user"] = ViewBag.connectedUser;
+    List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(Http.HttpContext.Session.GetString("votes"));
     bool is_upvote = false;
     bool is_downvote = false;
     if (votes != null)
     {
         foreach (var item in votes)
-        {
             if (item.LinkId == Model.Id)
             {
                 if (item.IsUpVote == true)
@@ -21,17 +21,17 @@
                 if (item.IsUpVote == false)
                     is_downvote = true;
             }
-        }
+        
     }
 }
 
 <div class="d-flex justify-content-center">
-    <div class="rounded card text-white" style="width:100vw;height:20rem">
-        <div class="card-body bg-secondary">
+    <div class="carte-parent">
+        <div class="carte-lien card-body bg-secondary text-white">
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h6 class="card-subtitle">@Model.Member.Username</h6>
             <h1 class="card-title">&nbsp;&nbsp;@Model.Title</h1>
-            <div class="float-start fw-bolder">
+            <div class="images-pouce">
                 @if (is_upvote == false)
                 {
                     <a asp-action="Upvote" style="cursor:pointer">
@@ -56,11 +56,8 @@
                         <img src="~/images/thumb-down.png" width="50%" height="50%" /> @Model.DownVote
                     </a>
                 }
-
-                <br />
-                <br />
             </div>
-            <h6>@Model.Description</h6>
+            <h6 class="description">@Model.Description</h6>
         </div>
     </div>
 </div>
@@ -74,18 +71,18 @@
             };
         </script>
     }
-    <div class="rounded-1 card bg-secondary" style="width:80vw">
+    <div class="carte-decoration bg-secondary">
         <div class="card-body text-white">
-            <input name="memberid" id="memberid" value="@ViewBag.connectedUser" hidden />
+            <input name="memberid" id="memberid" value="@ViewData["user"]" hidden />
             <input name="linkid" id="linkid" value="@Model.Id" hidden />
-            <input type="text" name="comment" id="comment" style="vertical-align:middle;width:92%" placeholder="Écrire un commentaire" />
+            <input class="comment-input" type="text" name="comment" id="comment" placeholder="Écrire un commentaire" />
             &nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary" type="submit" value="Publier" />
         </div>
     </div>
 </form>
 &nbsp;
 <div class="row d-flex justify-content-center">
-    <div class="rounded-1 card bg-secondary" style="width:80vw">
+    <div class="carte-decoration bg-secondary">
         <div class="card-body text-white">
             @if (Model.Comments.Count() == 0)
             {
@@ -108,5 +105,41 @@
     .div {
         overflow: auto;
     }
+    .description{
+        margin-left: 10%;
+        margin-right: 15%;
+        font-size:150%;
+        word-wrap: break-word;
+    }
+    .carte-parent{
+        border: 2px solid;
+        border-radius: 8px;
+        width: 80vw;
+        height: 20vw;
+    }
+    .carte-lien{
+        border-radius: 8px;
+        margin-bottom: 5px;
+        width:80vw;
+        height:20vw;
+    }
+    .carte-decoration{
+        border: 2px solid;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        width: 80vw;
+    }
+    .images-pouce{
+        float:left;
+        font-weight:bold;
+        text-decoration:none;
+        max-width: 7vw;
+    }
+    .images-pouce img{
+        bottom:0;
+    }
+    .comment-input{
+        vertical-align: middle;
+        width: 69vw;
+    }
 </style>
-

@@ -5,8 +5,8 @@
 *@
 
 <div class="d-flex justify-content-center">
-    <div class="text-white" style="width:80rem">
-        <div class="carte card-body bg-secondary">
+    <div class="carte bg-secondary">
+        <div class="card-body text-white">
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h4 class="card-subtitle">&nbsp;&nbsp;&nbsp;&nbsp; @Model.Member.Username</h4>
             <p class="card-title">@Model.Content</p>
@@ -15,9 +15,10 @@
 </div>
 
 <style>
-    .carte {
+    .carte{
         border: 2px solid;
         border-radius: 8px;
         margin-bottom: 5px;
+        width: 80vw;
     }
 </style>
