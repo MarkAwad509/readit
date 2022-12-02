@@ -4,73 +4,69 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    //ViewData["user"] = ViewBag.connectedUser;
+    //var t = Http.HttpContext.Session.GetString("votes");
+    List<Vote> votes = (List<Vote>)ViewData["votes"];
+    var member = (Member)ViewData["user"];
+    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(t);
+    bool is_upvote = false;
+    bool is_downvote = false;
+    votes = votes.Where(v => v.MemberId == member.Id && v.LinkId==Model.Id).ToList();
+    if (votes != null)
+    {
+        foreach (var item in votes)
+        {
+          
+                if (item.IsUpVote == 1)
+                    is_upvote = true;
+                if (item.IsUpVote == 0)
+                    is_downvote = true;
+
+            
+        }
+    }
 }
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 <div class="Link">
     <a asp-action="ViewLink" asp-controller="Home" asp-route-id="@Model.Id" style="text-decoration:none;color:black;">
-        <h1>@Model.Title</h1>
-        @{
-            bool upVotedorDownVoted = false;
-            var member = (Member)ViewData["user"];
-            Vote vote = null;
-            foreach (var item in Model.Votes) {
-                if (item.MemberId == member.Id) {
-                    if (item.IsUpVote is true) {
-                        upVotedorDownVoted = true;
-                        vote = item;
-                        break;
-                    }
-                    else {
-                        break;
-                    }
-                }
-            }
-        }
+        <h1 style="display:inline;">@Model.Title</h1>
+        
 
         @if (member.Id == Model.MemberId) {
-            <a style="text-decoration:none; color:black;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
+            <a style="text-decoration:none; color:black; display:inline;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
                 <i class="bi bi-x-circle-fill" style="display:inline;float:right"></i>
             </a>
         }
-        <h6>Published by: @member.Username</h6>
+        <h6>Published by: @Model.Member.Username</h6>
         <h6 class="text-muted"> @Model.PublicationDate</h6>
         &nbsp;
 
 
         <p style="word-break:break-all;">@Model.Description</p>
         <p style="float:right">
-            @Model.Votes.Where(w => w.IsUpVote is false).Count()
-            @if (upVotedorDownVoted == false && vote != null) {
-                <i class="bi bi-hand-thumbs-down-fill"></i>
-            }
-            else {
-                if (upVotedorDownVoted == true && vote != null) {
+        @if(votes.Count()>0){
+            if(is_upvote && is_downvote!=true){
+                    @Model.Votes.Where(w => w.IsUpVote ==1).Count()
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
+                    @Model.Votes.Where(w => w.IsUpVote ==0).Count()
                     <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
-                }
-                else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
-                }
+            }else{
 
-            }
-
-
-        </p>
-        <p style="float:right;">
-            @Model.Votes.Where(w => w.IsUpVote is true).Count()
-
-            @if (upVotedorDownVoted == true && vote != null) {
-                <i class="bi bi-hand-thumbs-up-fill"></i>
-            }
-            else {
-                if (upVotedorDownVoted == false) {
+                    @Model.Votes.Where(w => w.IsUpVote ==1).Count()
                     <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
-                }
-                else {
-                    <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
-                }
-
+                    @Model.Votes.Where(w => w.IsUpVote ==0).Count()
+                    <i class="bi bi-hand-thumbs-down-fill"></i>
+            
             }
+        }else{
+
+                @Model.Votes.Where(w => w.IsUpVote ==1).Count()
+                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                       @Model.Votes.Where(w => w.IsUpVote ==0).Count()
+                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+        }
         </p>
+
         <p style="float:right;">
             @Model.Comments.Count()
 
