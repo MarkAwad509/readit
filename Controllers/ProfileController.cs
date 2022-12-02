@@ -15,15 +15,11 @@ namespace Readit.Controllers {
 
         public IActionResult ProfileView() {
             var user = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
-            ViewBag.CommentCount = 0;
-            ViewBag.PostCount = 0;
-            if (user.Comments != null | user.Links != null)
-            {
-                ViewBag.CommentCount = user.Comments.Count;
-                ViewBag.PostCount = user.Links.Count;
-            }
-            ViewBag.user=user;
-            return View("ProfileView", user);
+            ViewBag.CommentCount = user.Comments.Count;
+            ViewBag.PostCount = user.Links.Count;
+            ViewBag.LikesCount = countScore(user);
+            ViewBag.user = user;
+            return View("ProfileView");
         }
 
         private int countScore(Member member) {
