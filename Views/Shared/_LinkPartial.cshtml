@@ -31,10 +31,10 @@
             <a style="text-decoration:none; color:black; display:inline;" asp-route-Id="@Model.Id" asp-action="delete" asp-controller="Home">
                 <i class="bi bi-x-circle-fill" style="display:inline;float:right"></i>
             </a>
-        } else{
             <h6>Published by: @member.Username</h6>
+        } else{
+            <h6>Published by: @Model.Member.Username</h6>
         }
-        <h6>Published by: @Model.Member.Username</h6>
         <h6 class="text-muted"> @Model.PublicationDate</h6>
         &nbsp;
 

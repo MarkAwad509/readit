@@ -16,9 +16,9 @@
         {
             if (item.LinkId == Model.Id)
             {
-                if (item.IsUpVote == 1)
+                if (item.IsUpVote == true)
                     is_upvote = true;
-                if (item.IsUpVote == 0)
+                if (item.IsUpVote == false)
                     is_downvote = true;
             }
         }
