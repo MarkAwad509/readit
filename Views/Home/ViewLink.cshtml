@@ -1,63 +1,66 @@
-﻿@using Readit.Models.Entities
+@using Readit.Models.Entities
 @using Microsoft.AspNetCore.Http;
 @using Newtonsoft.Json;
 @inject IHttpContextAccessor Http;
 @model Link
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
-    ViewData["user"] = ViewBag.connectedUser;
-    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(Http.HttpContext.Session.GetString("votes"));
+    //ViewData["user"] = ViewBag.connectedUser;
+    //var t = Http.HttpContext.Session.GetString("votes");
+    List<Vote> votes = ViewBag.connectedUser.Votes;
+    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(t);
     bool is_upvote = false;
     bool is_downvote = false;
-    //if (votes != null)
-    //{
-    //    foreach (var item in votes)
-    //        if (item.LinkId == Model.Id)
-    //        {
-    //            if (item.IsUpVote == true)
-    //                is_upvote = true;
-    //            if (item.IsUpVote == false)
-    //                is_downvote = true;
-    //        }
-
-    //}
+    if (votes != null)
+    {
+        foreach (var item in votes)
+        {
+            if (item.LinkId == Model.Id)
+            {
+                if (item.IsUpVote == 1)
+                    is_upvote = true;
+                if (item.IsUpVote == 0)
+                    is_downvote = true;
+            }
+        }
+    }
 }
 
 <div class="d-flex justify-content-center">
-    <div class="carte-parent bg-secondary">
-        <div class="carte-lien card-body text-white">
+    <div class="rounded card text-white" style="width:100vw;height:20rem">
+        <div class="card-body bg-secondary">
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h6 class="card-subtitle">@Model.Member.Username</h6>
             <h1 class="card-title">&nbsp;&nbsp;@Model.Title</h1>
-            <div class="images-pouce">
+            <div class="float-start fw-bolder">
                 @if (is_upvote == false)
                 {
                     <a asp-action="Upvote" style="cursor:pointer">
-                        <img class="thumb-img" src="~/images/thumb-up-outline.png" /> @Model.UpVote
+                        <img src="~/images/thumb-up-outline.png" width="50%" height="50%" /> @Model.UpVote
                     </a>
                 }
                 @if (is_upvote == true)
                 {
                     <a asp-action="RemoveUpvote" style="cursor:pointer">
-                        <img class="thumb-img" src="~/images/thumb-up.png" /> @Model.UpVote
+                        <img src="~/images/thumb-up.png" width="50%" height="50%" /> @Model.UpVote
                     </a>
                 }
                 @if (is_downvote == false)
                 {
                     <a asp-action="Downvote" style="cursor:pointer">
-                        <img class="thumb-img" src="~/images/thumb-down-outline.png" /> @Model.DownVote
+                        <img src="~/images/thumb-down-outline.png" width="50%" height="50%" /> @Model.DownVote
                     </a>
                 }
                 @if (is_downvote == true)
                 {
                     <a asp-action="RemoveDownvote" style="cursor:pointer">
-                        <img class="thumb-img" src="~/images/thumb-down.png" /> @Model.DownVote
+                        <img src="~/images/thumb-down.png" width="50%" height="50%" /> @Model.DownVote
                     </a>
                 }
+
+                <br />
+                <br />
             </div>
-            <h6 class="description">@Model.Description</h6>
+            <h6>@Model.Description</h6>
         </div>
     </div>
 </div>
@@ -71,18 +74,18 @@
             };
         </script>
     }
-    <div class="carte-decoration bg-secondary">
+    <div class="rounded-1 card bg-secondary" style="width:80vw">
         <div class="card-body text-white">
-            <input name="memberid" id="memberid" value="@ViewBag.connectedUser.Id" hidden />
+            <input name="memberid" id="memberid" value="@ViewBag.connectedUser" hidden />
             <input name="linkid" id="linkid" value="@Model.Id" hidden />
-            <input class="comment-input" type="text" name="comment" id="comment" placeholder="Écrire un commentaire" />
+            <input type="text" name="comment" id="comment" style="vertical-align:middle;width:92%" placeholder="Écrire un commentaire" />
             &nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary" type="submit" value="Publier" />
         </div>
     </div>
 </form>
 &nbsp;
 <div class="row d-flex justify-content-center">
-    <div class="carte-decoration bg-secondary">
+    <div class="rounded-1 card bg-secondary" style="width:80vw">
         <div class="card-body text-white">
             @if (Model.Comments.Count() == 0)
             {
@@ -96,8 +99,14 @@
     </div>
 </div>
 <div class="container div">
-    @foreach (var comment in Model.Comments.OrderByDescending(c => c.PublicationDate))
-    {
-        <partial name="_Comment" model="comment" />
-    }
+@foreach (var comment in Model.Comments.OrderByDescending(c => c.PublicationDate))
+{
+    <partial name="_Comment" model="comment" />
+}
 </div>
+<style>
+    .div {
+        overflow: auto;
+    }
+</style>
+
