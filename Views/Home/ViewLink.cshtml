@@ -4,10 +4,7 @@
 @inject IHttpContextAccessor Http;
 @model Link
 @{
-    //ViewData["user"] = ViewBag.connectedUser;
-    //var t = Http.HttpContext.Session.GetString("votes");
     List<Vote> votes = ViewBag.connectedUser.Votes;
-    //List<Vote>? votes = JsonConvert.DeserializeObject<List<Vote>>(t);
     bool is_upvote = false;
     bool is_downvote = false;
     if (votes != null)
@@ -26,39 +23,36 @@
 }
 
 <div class="d-flex justify-content-center">
-    <div class="rounded card text-white" style="width:100vw;height:20rem">
-        <div class="card-body bg-secondary">
+    <div class="carte-parent bg-secondary">
+        <div class="carte-lien card-body text-white">
             <h6 class="float-end">Date de publication: @Model.PublicationDate</h6>
             <h6 class="card-subtitle">@Model.Member.Username</h6>
             <h1 class="card-title">&nbsp;&nbsp;@Model.Title</h1>
-            <div class="float-start fw-bolder">
+            <div class="images-pouce">
                 @if (is_upvote == false)
                 {
                     <a asp-action="Upvote" style="cursor:pointer">
-                        <img src="~/images/thumb-up-outline.png" width="50%" height="50%" /> @Model.UpVote
+                        <img class="thumb-img" src="~/images/thumb-up-outline.png" /> @Model.UpVote
                     </a>
                 }
                 @if (is_upvote == true)
                 {
                     <a asp-action="RemoveUpvote" style="cursor:pointer">
-                        <img src="~/images/thumb-up.png" width="50%" height="50%" /> @Model.UpVote
+                        <img class="thumb-img" src="~/images/thumb-up.png" /> @Model.UpVote
                     </a>
                 }
                 @if (is_downvote == false)
                 {
                     <a asp-action="Downvote" style="cursor:pointer">
-                        <img src="~/images/thumb-down-outline.png" width="50%" height="50%" /> @Model.DownVote
+                        <img class="thumb-img" src="~/images/thumb-down-outline.png" /> @Model.DownVote
                     </a>
                 }
                 @if (is_downvote == true)
                 {
                     <a asp-action="RemoveDownvote" style="cursor:pointer">
-                        <img src="~/images/thumb-down.png" width="50%" height="50%" /> @Model.DownVote
+                        <img class="thumb-img" src="~/images/thumb-down.png" /> @Model.DownVote
                     </a>
                 }
-
-                <br />
-                <br />
             </div>
             <h6>@Model.Description</h6>
         </div>
@@ -74,18 +68,18 @@
             };
         </script>
     }
-    <div class="rounded-1 card bg-secondary" style="width:80vw">
+    <div class="carte-decoration bg-secondary">
         <div class="card-body text-white">
-            <input name="memberid" id="memberid" value="@ViewBag.connectedUser" hidden />
+            <input name="memberid" id="memberid" value="@ViewBag.connectedUser.Id" hidden />
             <input name="linkid" id="linkid" value="@Model.Id" hidden />
-            <input type="text" name="comment" id="comment" style="vertical-align:middle;width:92%" placeholder="Écrire un commentaire" />
+            <input class="comment-input" type="text" name="comment" id="comment" placeholder="Écrire un commentaire" />
             &nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary" type="submit" value="Publier" />
         </div>
     </div>
 </form>
 &nbsp;
 <div class="row d-flex justify-content-center">
-    <div class="rounded-1 card bg-secondary" style="width:80vw">
+    <div class="carte-decoration bg-secondary">
         <div class="card-body text-white">
             @if (Model.Comments.Count() == 0)
             {
@@ -99,14 +93,8 @@
     </div>
 </div>
 <div class="container div">
-@foreach (var comment in Model.Comments.OrderByDescending(c => c.PublicationDate))
-{
-    <partial name="_Comment" model="comment" />
-}
-</div>
-<style>
-    .div {
-        overflow: auto;
+    @foreach (var comment in Model.Comments.OrderByDescending(c => c.PublicationDate))
+    {
+        <partial name="_Comment" model="comment" />
     }
-</style>
-
+</div>

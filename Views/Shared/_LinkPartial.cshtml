@@ -42,15 +42,15 @@
         <p style="word-break:break-all;">@Model.Description</p>
         <p style="float:right">
         @if(votes.Count() > 0){
-            if(!is_upvote && !is_downvote){
+            if(is_upvote && !is_downvote){
                     @Model.Votes.Where(w => w.IsUpVote == true).Count()
                     <i class="bi bi-hand-thumbs-up-fill"></i>
                     @Model.Votes.Where(w => w.IsUpVote ==false).Count()
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="false"> <i class="bi bi-hand-thumbs-down"></i></a>
             }else{
 
                     @Model.Votes.Where(w => w.IsUpVote ==true).Count()
-                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                    <a asp-action="ThumbsUpdate" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="true"> <i class="bi bi-hand-thumbs-up"></i></a>
                     @Model.Votes.Where(w => w.IsUpVote ==false).Count()
                     <i class="bi bi-hand-thumbs-down-fill"></i>
             
@@ -58,9 +58,9 @@
         }else{
 
                 @Model.Votes.Where(w => w.IsUpVote ==true).Count()
-                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="1"> <i class="bi bi-hand-thumbs-up"></i></a>
+                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="true"> <i class="bi bi-hand-thumbs-up"></i></a>
                        @Model.Votes.Where(w => w.IsUpVote ==false).Count()
-                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="0"> <i class="bi bi-hand-thumbs-down"></i></a>
+                <a asp-action="Thumbs" asp-controller="Home" asp-route-LinkId="@Model.Id" asp-route-MemberId="@member.Id" asp-route-updown="false"> <i class="bi bi-hand-thumbs-down"></i></a>
         }
         </p>
 

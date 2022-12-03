@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-auto link-col">
-            @foreach (Link link in member.Links.ToList()) {
+            @foreach (Link link in (List<Link>)ViewBag.links){
                 <partial name="_ProfileLink" model="@link" view-data="ViewData" />
             }
         </div>
