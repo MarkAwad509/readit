@@ -6,17 +6,19 @@
     ViewData["LikesCount"] = ViewBag.LikesCount;
     ViewData["Title"] = "Profile";
     ViewData["user"] = ViewBag.user;
+    Member member = (Member)ViewData["user"];
 }
 <div class="container">
     <div class="row">
-        <div class="col-sm" style="max-width:500px">
-            @foreach (var link in Model.Links.ToList()){
-                <partial name="_LinkPartial" model="link" view-data="ViewData" />
+        <div class="col-sm-auto link-col">
+            @foreach (Link link in member.Links.ToList()) {
+                <partial name="_ProfileLink" model="@link" view-data="ViewData" />
             }
         </div>
+        <span>Don't have any links?<a asp-controller="Home" asp-action="Create"> Make one here.</a></span>
 
-        <div class="col-sm">
-            <partial name="_Profile" model="@Model" view-data="ViewData"/>
+        <div class="col-sm-auto member-col">
+            <partial name="_Profile" model="@member" view-data="ViewData"/>
         </div>
     </div>
 </div>

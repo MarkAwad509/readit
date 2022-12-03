@@ -14,12 +14,5 @@ namespace Readit.Models.Entities
         public virtual ICollection<Link> Links { get; set; }
         public virtual ICollection<Vote> Votes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-
-        public Member(string Username, string Email, string Password)
-        {
-            this.Username = Username;
-            this.Email = Email;
-            this.Password = Password;
-        }
     }
 }
