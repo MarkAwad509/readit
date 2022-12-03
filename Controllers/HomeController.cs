@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Readit.Models;
 using Readit.Models.Entities;
-using System.Linq;
 
 namespace Readit.Controllers {
     public class HomeController : Controller {
@@ -26,10 +25,8 @@ namespace Readit.Controllers {
         }
 
         public IActionResult Delete(int Id) {
-            var link = _context.Links.Where(l => l.Id.Equals(Id))
-                .Include(l => l.Comments)
-                .Include(l => l.Votes).First();
-            _context.Links.Remove(link);
+            var l = _context.Links.Find(Id);
+            _context.Links.Remove(l);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
