@@ -10,7 +10,6 @@
     if (votes != null)
     {
         foreach (var item in votes)
-        {
             if (item.LinkId == Model.Id)
             {
                 if (item.IsUpVote == true)
@@ -18,7 +17,7 @@
                 if (item.IsUpVote == false)
                     is_downvote = true;
             }
-        }
+        
     }
 }
 
@@ -56,7 +55,7 @@
             </div>
             <h6>@Model.Description</h6>
         </div>
-    </div>
+    
 </div>
 &nbsp;
 <form class="row d-flex justify-content-center" asp-action="PublierCommentaire">

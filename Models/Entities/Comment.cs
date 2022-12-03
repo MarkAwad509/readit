@@ -12,7 +12,6 @@ namespace Readit.Models.Entities
         public int? LinkId { get; set; }
         public string? Content { get; set; }
         public DateTime? PublicationDate { get; set; }
-
         public virtual Link? Link { get; set; }
         public virtual Member? Member { get; set; }
     }
