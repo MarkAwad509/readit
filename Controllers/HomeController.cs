@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Readit.Models;
 using Readit.Models.Entities;
+using System.Diagnostics.Metrics;
 
 namespace Readit.Controllers {
     public class HomeController : Controller {
@@ -17,23 +18,75 @@ namespace Readit.Controllers {
         public ActionResult Index() {
             var member = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             if (member.Email != null) {
-                ViewBag.connectedUser = member.Id;
-                return View("Index", _context.Links.ToList());
+                ViewBag.connectedUser = member;
+                ViewBag.votes = _context.Votes.Where(v => v.MemberId == member.Id).ToList();
+                return View("Index", _context.Links.OrderByDescending(w => w.PublicationDate).ToList());
             }
             else
                 return RedirectToAction("Index", "Login");
         }
 
+        public IActionResult Thumbs(int LinkId, int MemberId, bool updown)
+        {
+
+            Vote vote = new Vote()
+            {
+                LinkId = LinkId,
+                MemberId = MemberId,
+                IsUpVote = updown
+            };
+            _context.Add<Vote>(vote);
+            
+            _context.SaveChanges();
+            _context.Entry<Vote>(vote).Reload();
+
+            return RedirectToAction("Index");
+
+        }
+        
+        public IActionResult ThumbsUpdate(int LinkId)
+        {
+            Vote vote = _context.Votes.Where(v => v.LinkId == LinkId && v.MemberId == JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id).First();
+            _context.Votes.Remove(vote);
+            _context.SaveChanges();
+            if (vote.IsUpVote == false)
+            {
+                vote.IsUpVote = true;
+            }
+            else
+            {
+                vote.IsUpVote = false;
+            }
+            _context.Add<Vote>(vote);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Delete(int Id) {
-            var l = _context.Links.Find(Id);
-            _context.Links.Remove(l);
+             foreach(var item in _context.Comments)
+            {
+                if (item.LinkId == Id)
+                {
+                    _context.Comments.Remove(item);
+                }
+                }
+            foreach (var item in _context.Votes)
+            {
+                if (item.LinkId == Id)
+                {
+                    _context.Votes.Remove(item);
+                }
+            }
+            _context.Links.Remove(_context.Links.Where(l=>l.Id==Id).First());
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult ViewLink(int Id) {
-            ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
-            return View(_context.Links.Where(l => l.Id == Id).First());
+            ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
+            return View(_context.Links.Where(l => l.Id == Id).FirstOrDefault());
         }
 
         public IActionResult Create() {

@@ -1,0 +1,21 @@
+﻿.Link-Profile {
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 5px;
+    width: 350px;
+    height: auto;
+    overflow: hidden;
+    background-color: lightgray;
+    align-content: flex-start;
+}
+
+.Title {
+    width: 10ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.delete-row{
+    height:1rem;
+}

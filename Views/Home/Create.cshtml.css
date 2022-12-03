@@ -1,0 +1,20 @@
+﻿.form-grid {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 5px;
+    height: 40vh;
+    background-color: grey;
+}
+
+.title-input {
+    width: 100%;
+}
+
+.submit-button {
+    margin-left:50%;
+    margin-top:3%;
+}
+
+.img-engineers {
+    position: center;
+}

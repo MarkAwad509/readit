@@ -4,21 +4,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["user"] = ViewBag.connectedUser;
     ViewData["Title"] = "Home Page";
+    ViewData["votes"] = ViewBag.votes;
 }
-<div>
-    <div class="row d-flex justify-content-center">
-        <div class="card bg-secondary" style="width:50rem;cursor:pointer">
-            <div class="card-body text-white">
-                &nbsp;&nbsp;<h4 class="float-start">Publier</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a asp-action="Create" style="vertical-align:middle">
-                    <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
-                </a>
-            </div>
+<div class="d-flex justify-content-center">
+    <div class="create-card">
+        <div class="card-body">
+            <h4 class="publier-text float-start">Publier</h4>
+            <a asp-action="Create" style="vertical-align:middle">
+                <input type="text" style="vertical-align:middle;width:75%" placeholder="Publier un lien" />
+            </a>
         </div>
     </div>
-    <br />
-    @foreach (var item in Model)
-    {
-        <partial name="_Link" model="item" view-data="ViewData" />
-    }
+</div>
+<div class="row">
+    <div class="column img-container-left">
+        <img style="width:200px;height:600px;" src="~/images/social-boy.png" />
+    </div>
+
+    <div class="column link-col">
+        <div class="LinkContainer">
+            @foreach (var item in Model)
+            {
+                <div style="margin-left:3px;margin-top:5px">
+                    <partial name="_LinkPartial" model="item" view-data="ViewData" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="column img-container-right">
+        <img style="width:200px;height:600px;" src="~/images/social-girl.png" />
+    </div>
 </div>

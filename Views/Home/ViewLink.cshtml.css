@@ -1,0 +1,53 @@
+﻿.div {
+    overflow: auto;
+}
+
+.description {
+    margin-left: 10%;
+    margin-right: 15%;
+    font-size: 150%;
+    word-wrap: break-word;
+}
+
+.carte-parent {
+    border: 2px solid;
+    border-radius: 8px;
+    width: 80vw;
+    height: 20vw;
+}
+
+.carte-lien {
+    border-radius: 8px;
+    margin-bottom: 5px;
+    width: 80vw;
+    height: 20vh;
+}
+
+.carte-decoration {
+    border: 2px solid;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    width: 80vw;
+}
+
+.images-pouce {
+    float: left;
+    font-weight: bold;
+    text-decoration: none;
+    max-width: 7vw;
+    margin-top: 10vh;
+}
+
+    .images-pouce img {
+        bottom: 0;
+    }
+
+.comment-input {
+    vertical-align: middle;
+    width: 69vw;
+}
+
+.thumb-img {
+    width: 50%;
+    height: 50%;
+}
