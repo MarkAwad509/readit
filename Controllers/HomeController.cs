@@ -19,16 +19,14 @@ namespace Readit.Controllers {
             var member = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
             if (member.Email != null) {
                 ViewBag.connectedUser = member;
-                ViewBag.votes = _context.Votes.Where(v=>v.MemberId==member.Id).ToList();
-                return View("Index", _context.Links.OrderByDescending(w=>w.PublicationDate).ToList());
+                ViewBag.votes = _context.Votes.Where(v => v.MemberId == member.Id).ToList();
+                return View("Index", _context.Links.OrderByDescending(w => w.PublicationDate).ToList());
             }
             else
                 return RedirectToAction("Index", "Login");
         }
-        /*
-         * 
-         */
-        public IActionResult Thumbs(int LinkId, int MemberId, ulong updown)
+
+        public IActionResult Thumbs(int LinkId, int MemberId, bool updown)
         {
 
             Vote vote = new Vote()
@@ -45,20 +43,19 @@ namespace Readit.Controllers {
             return RedirectToAction("Index");
 
         }
+        
         public IActionResult ThumbsUpdate(int LinkId)
         {
-           
-
             Vote vote = _context.Votes.Where(v => v.LinkId == LinkId && v.MemberId == JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id).First();
             _context.Votes.Remove(vote);
             _context.SaveChanges();
-            if (vote.IsUpVote == 0)
+            if (vote.IsUpVote == false)
             {
-                vote.IsUpVote = 1;
+                vote.IsUpVote = true;
             }
             else
             {
-                vote.IsUpVote = 0;
+                vote.IsUpVote = false;
             }
             _context.Add<Vote>(vote);
             _context.SaveChanges();
@@ -66,6 +63,7 @@ namespace Readit.Controllers {
             return RedirectToAction("Index");
 
         }
+
         public IActionResult Delete(int Id) {
              foreach(var item in _context.Comments)
             {
