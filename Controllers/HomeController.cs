@@ -33,8 +33,6 @@ namespace Readit.Controllers {
 
         public IActionResult ViewLink(int Id) {
             ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user"));
-            return View(_context.Links.Where(l => l.Id == Id).FirstOrDefault());
-            ViewBag.connectedUser = JsonConvert.DeserializeObject<Member>(_session.GetString("user")).Id;
             return View(_context.Links.Find(Id));
         }
 
@@ -57,10 +55,13 @@ namespace Readit.Controllers {
         }
 
         public IActionResult PublierCommentaire(int linkid, int memberid, string comment) {
-            if (comment != null) {
+            if (comment != null)
+            {
                 var verification = comment.Split(' ');
-                if (verification.Count() > 0) {
-                    Comment commentaire = new Comment() {
+                if (verification.Count() > 0)
+                {
+                    Comment commentaire = new Comment()
+                    {
                         LinkId = linkid,
                         MemberId = memberid,
                         Content = comment,
@@ -70,7 +71,8 @@ namespace Readit.Controllers {
                     _context.SaveChanges();
                 }
             }
-            else {
+            else
+            {
                 ViewBag.Alert = String.Format("Votre commentaire doit contenir au minimum un charactère");
             }
             return RedirectToAction("ViewLink", new { Id = linkid });
